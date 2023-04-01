@@ -1,0 +1,6 @@
+# Project files
+vendor/
+
+# Other common files
+*.orig
+.*.swp

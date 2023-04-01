@@ -1,0 +1,24 @@
+{
+    "name": "club-1/sphinx-inventory-parser",
+    "description": "Parse Sphinx documentation's object.inv inventory file format into an indexed SphinxInventory object.",
+    "type": "library",
+    "license": "LGPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Club1\\SphinxInventoryParser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nicolas Peugnet",
+            "email": "nicolas@club1.fr"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-zlib": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+}
