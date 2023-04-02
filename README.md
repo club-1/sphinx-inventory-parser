@@ -52,10 +52,10 @@ make check  # Run tests.
 make clean  # Clean all downloaded and generated files.
 ```
 
-[licensvg]: https://img.shields.io/packagist/l/club-1/sphinx-inventory-parser
+[licensvg]: https://img.shields.io/badge/license-LGPL--2.1--or--later-blue "GNU Lesser General Public License version 2.1 or later"
 [licenurl]: LICENSE
-[phpvtsvg]: https://img.shields.io/badge/php-7.3%20%7C%207.4%20%7C%208.0%20%7C%208.1%20%7C%208.2-blue
-[buildsvg]: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/build.yml
+[phpvtsvg]: https://img.shields.io/badge/php-7.3%20%7C%207.4%20%7C%208.0%20%7C%208.1%20%7C%208.2-blue "PHP versions tested"
+[buildsvg]: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/build.yml "Unit tests & other checks"
 [buildurl]: https://github.com/club-1/sphinx-inventory-parser/actions/workflows/build.yml?query=branch%3Amain
-[coversvg]: https://img.shields.io/codecov/c/gh/club-1/sphinx-inventory-parser
+[coversvg]: https://img.shields.io/codecov/c/gh/club-1/sphinx-inventory-parser "Lines of code covered by tests"
 [coverurl]: https://app.codecov.io/gh/club-1/sphinx-inventory-parser
