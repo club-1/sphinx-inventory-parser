@@ -97,10 +97,7 @@ class SphinxInventoryParser
 			$inventory->addObject(new SphinxObject($name, $domain, $role, intval($priority), $uri, $displayName));
 		}
 		if (!feof($stream)) {
-			 // @codeCoverageIgnoreStart
-			$msg = error_get_last()['message'];
-			throw new UnexpectedValueException("could not read until end of stream: $msg");
-			 // @codeCoverageIgnoreEnd
+			throw new UnexpectedValueException('could not read until end of stream'); // @codeCoverageIgnore
 		}
 		return $inventory;
 	}
