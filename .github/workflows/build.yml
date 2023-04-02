@@ -33,7 +33,7 @@ jobs:
       - name: Run check
         env:
           PHPUNITFLAGS: --coverage-clover=cov.xml
-        run: make check
+        run: make check --keep-going
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
