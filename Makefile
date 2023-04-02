@@ -15,7 +15,7 @@ tests/data:
 check: analyse test;
 
 analyse: vendor
-	vendor/bin/phpstan analyse src --level 5
+	vendor/bin/phpstan analyse src --level 7
 
 test: vendor tests/data
 	XDEBUG_MODE=coverage vendor/bin/phpunit tests --coverage-filter='src' $(PHPUNITFLAGS)

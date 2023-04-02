@@ -63,12 +63,19 @@ final class SphinxInventoryParserTest extends TestCase
 		fclose($stream);
 	}
 
+	/**
+	 * @return string[][]
+	 */
 	public function parseExceptionsProvider(): array
 	{
 		return [
 			[
 				'objects.inv.empty',
-				"first line is not a valid Sphinx inventory version string: ''",
+				'unexpected end of file',
+			],
+			[
+				'objects.inv.invalid_sphinx',
+				"first line is not a valid Sphinx inventory version string: '# Invalid Sphinx inventory v'",
 			],
 			[
 				'objects.inv.unsupported_inventory_version',

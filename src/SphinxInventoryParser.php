@@ -30,11 +30,11 @@ class SphinxInventoryParser
 	/**
 	 * Parse a readable stream into an indexed SphinxInventory object.
 	 *
-	 * @param resource $stream		The ressource opened in read mode to parse.
+	 * @param resource	$stream		The resource to parse, opened in read mode.
 	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
 	 */
 	public function parse($stream, string $baseURI = ''): SphinxInventory {
-		$versionStr = fgets($stream, 30);
+		$versionStr = $this->ffgets($stream, 30);
 		$result = sscanf($versionStr, '# Sphinx inventory version %d', $version);
 		if ($result !== 1) {
 			$str = substr($versionStr, 0, -1);
@@ -52,19 +52,21 @@ class SphinxInventoryParser
 	 * @param resource $stream
 	 */
 	protected function parseV2($stream, string $baseURI): SphinxInventory {
-		$projectStr = fgets($stream);
+		$projectStr = $this->ffgets($stream);
 		$result = sscanf($projectStr, '# Project: %s', $project);
 		if ($result !== 1) {
 			$str = substr($projectStr, 0, -1);
 			throw new UnexpectedValueException("second line is not a valid Project string: '$str'");
 		}
-		$versionStr = fgets($stream);
+		assert(is_string($project), '$project must be a string');
+		$versionStr = $this->ffgets($stream);
 		$result = sscanf($versionStr, '# Version: %s', $version);
 		if ($result !== 1) {
 			$str = substr($versionStr, 0, -1);
 			throw new UnexpectedValueException("third line is not a valid Version string: '$str'");
 		}
-		$zlibStr = fgets($stream);
+		assert(is_string($version), '$version must be a string');
+		$zlibStr = $this->ffgets($stream);
 		if (strpos($zlibStr, 'zlib') === false) {
 			$str = substr($zlibStr, 0, -1);
 			throw new UnexpectedValueException("fourth line does advertise zlib compression: '$str'");
@@ -101,5 +103,21 @@ class SphinxInventoryParser
 			 // @codeCoverageIgnoreEnd
 		}
 		return $inventory;
+	}
+
+	/**
+	 * Wrapper arounf fgets that expects a line to be readable.
+	 *
+	 * @param resource		$stream		The resource to read from.
+	 * @param int<0, max>|null	$length		Max length to read.
+	 * @throws UnexpectedValueException	If no line is readeble.
+	 */
+	protected function ffgets($stream, ?int $length = null): string
+	{
+		$line = fgets($stream, $length);
+		if ($line === false) {
+			throw new UnexpectedValueException('unexpected end of file');
+		}
+		return $line;
 	}
 }

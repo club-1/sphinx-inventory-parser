@@ -40,7 +40,7 @@ class SphinxInventory {
 		$this->version = $version;
 	}
 
-	public function addObject(SphinxObject $object)
+	public function addObject(SphinxObject $object): void
 	{
 		$this->objects[] = $object;
 		if (!isset($this->domains[$object->domain])) {
