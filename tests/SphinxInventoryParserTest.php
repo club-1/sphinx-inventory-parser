@@ -9,10 +9,12 @@ final class SphinxInventoryParserTest extends TestCase
 {
 	public function testParseValid(): void
 	{
-		$stream = fopen(__DIR__ . '/data/objects.inv.valid', 'r');
 		$parser = new SphinxInventoryParser();
+		$stream = fopen(__DIR__ . '/data/objects.inv.valid', 'r');
 		$inventory = $parser->parse($stream, 'https://club1.fr/docs/fr/');
 		fclose($stream);
+		$this->assertEquals('CLUB1', $inventory->project);
+		$this->assertEquals('main', $inventory->version);
 		$this->assertCount(334, $inventory->objects);
 		$this->assertCount(1, $inventory->domains);
 		$this->assertCount(5, $inventory->domains['std']);
@@ -32,8 +34,8 @@ final class SphinxInventoryParserTest extends TestCase
 
 	public function testParseNoObjects(): void
 	{
-		$stream = fopen(__DIR__ . '/data/objects.inv.no_objects', 'r');
 		$parser = new SphinxInventoryParser();
+		$stream = fopen(__DIR__ . '/data/objects.inv.no_objects', 'r');
 		$inventory = $parser->parse($stream);
 		fclose($stream);
 		$this->assertCount(0, $inventory->objects);
@@ -41,70 +43,53 @@ final class SphinxInventoryParserTest extends TestCase
 
 	public function testParseSkippedLines(): void
 	{
-		$stream = fopen(__DIR__ . '/data/objects.inv.skipped_lines', 'r');
 		$parser = new SphinxInventoryParser();
+		$stream = fopen(__DIR__ . '/data/objects.inv.skipped_lines', 'r');
 		$inventory = $parser->parse($stream);
 		fclose($stream);
 		$this->assertCount(1, $inventory->objects);
 	}
 
-	public function testParseEmpty(): void
+	/**
+	 * @dataProvider parseExceptionsProvider
+	 */
+	public function testParseExceptions(string $file, string $message): void
 	{
 		$this->expectException(UnexpectedValueException::class);
-		$this->expectExceptionMessage("first line is not a valid Sphinx inventory version string: ''");
-		$stream = fopen(__DIR__ . '/data/objects.inv.empty', 'r');
+		$this->expectExceptionMessage($message);
 		$parser = new SphinxInventoryParser();
+		$stream = fopen(__DIR__ . "/data/$file", 'r');
 		$parser->parse($stream);
 		fclose($stream);
 	}
 
-	public function testParseUnsupportedInventoryVersion(): void
+	public function parseExceptionsProvider(): array
 	{
-		$this->expectException(UnexpectedValueException::class);
-		$this->expectExceptionMessage("unsupported Sphinx inventory version: 0");
-		$stream = fopen(__DIR__ . '/data/objects.inv.unsupported_inventory_version', 'r');
-		$parser = new SphinxInventoryParser();
-		$parser->parse($stream);
-		fclose($stream);
-	}
-
-	public function testParseInvalidProject(): void
-	{
-		$this->expectException(UnexpectedValueException::class);
-		$this->expectExceptionMessage("second line is not a valid Project string: '# Invalid Project: CLUB1'");
-		$stream = fopen(__DIR__ . '/data/objects.inv.invalid_project', 'r');
-		$parser = new SphinxInventoryParser();
-		$parser->parse($stream);
-		fclose($stream);
-	}
-
-	public function testParseInvalidVersion(): void
-	{
-		$this->expectException(UnexpectedValueException::class);
-		$this->expectExceptionMessage("third line is not a valid Version string: '# Invalid Version: 42'");
-		$stream = fopen(__DIR__ . '/data/objects.inv.invalid_version', 'r');
-		$parser = new SphinxInventoryParser();
-		$parser->parse($stream);
-		fclose($stream);
-	}
-
-	public function testParseNoZlib(): void
-	{
-		$this->expectException(UnexpectedValueException::class);
-		$this->expectExceptionMessage("fourth line does advertise zlib compression: '# The remainder of this file is not compressed.'");
-		$stream = fopen(__DIR__ . '/data/objects.inv.no_zlib', 'r');
-		$parser = new SphinxInventoryParser();
-		$parser->parse($stream);
-		fclose($stream);
-	}
-
-	public function testParseInvalidObject(): void
-	{
-		$this->expectException(UnexpectedValueException::class);
-		$this->expectExceptionMessage("object string did not match pattern: 'invalid sphinx inventory object line'");
-		$stream = fopen(__DIR__ . '/data/objects.inv.invalid_object', 'r');
-		$parser = new SphinxInventoryParser();
-		$parser->parse($stream);
-		fclose($stream);
+		return [
+			[
+				'objects.inv.empty',
+				"first line is not a valid Sphinx inventory version string: ''",
+			],
+			[
+				'objects.inv.unsupported_inventory_version',
+				"unsupported Sphinx inventory version: 0",
+			],
+			[
+				'objects.inv.invalid_project',
+				"second line is not a valid Project string: '# Invalid Project: CLUB1'",
+			],
+			[
+				'objects.inv.invalid_version',
+				"third line is not a valid Version string: '# Invalid Version: 42'",
+			],
+			[
+				'objects.inv.no_zlib',
+				"fourth line does advertise zlib compression: '# The remainder of this file is not compressed.'",
+			],
+			[
+				'objects.inv.invalid_object',
+				"object string did not match pattern: 'invalid sphinx inventory object line'",
+			],
+		];
 	}
 }

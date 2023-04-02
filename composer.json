@@ -2,7 +2,7 @@
     "name": "club-1/sphinx-inventory-parser",
     "description": "Parse Sphinx documentation's object.inv inventory file format into an indexed SphinxInventory object.",
     "type": "library",
-    "license": "LGPL-3.0-or-later",
+    "license": "LGPL-2.1-or-later",
     "autoload": {
         "psr-4": {
             "Club1\\SphinxInventoryParser\\": "src/"

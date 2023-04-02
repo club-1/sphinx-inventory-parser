@@ -7,7 +7,10 @@ use UnexpectedValueException;
 class SphinxInventoryParser
 {
 	/**
-	 * @param resource $stream	The ressource opened in read mode from which to parse the Sphinx inventory.
+	 * Parse a readable stream into an indexed SphinxInventory object.
+	 *
+	 * @param resource $stream		The ressource opened in read mode to parse.
+	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
 	 */
 	public function parse($stream, string $baseURI = ''): SphinxInventory {
 		$versionStr = fgets($stream, 30);
