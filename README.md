@@ -1,5 +1,6 @@
 # PHP Sphinx Inventory Parser
 
+![PHP versions tested][phpvtsvg]
 [![build status][buildsvg]][buildurl]
 [![coverage report][coversvg]][coverurl]
 
@@ -50,6 +51,7 @@ make check  # Run tests.
 make clean  # Clean all downloaded and generated files.
 ```
 
+[phpvtsvg]: https://img.shields.io/badge/php-7.3%20%7C%207.4%20%7C%208.0%20%7C%208.1%20%7C%208.2-blue
 [buildsvg]: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/build.yml
 [buildurl]: https://github.com/club-1/sphinx-inventory-parser/actions/workflows/build.yml?query=branch%3Amain
 [coversvg]: https://img.shields.io/codecov/c/gh/club-1/sphinx-inventory-parser
