@@ -1,10 +1,5 @@
-*
-!.gitignore
-!*.data
-!*.header
-!objects.inv.empty
-objects.inv.invalid_project
-objects.inv.invalid_version
-objects.inv.no_zlib
-objects.inv.unsupported_inventory_version
-
+*.zz
+objects.inv.invalid_object
+objects.inv.no_objects
+objects.inv.skipped_lines
+objects.inv.valid
