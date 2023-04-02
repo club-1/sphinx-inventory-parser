@@ -9,7 +9,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.3', '8.2']
     steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: xdebug
+
       - uses: actions/checkout@v3
 
       - name: Install PHP dependencies
