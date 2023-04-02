@@ -3,7 +3,7 @@ PHPUNITFLAGS  += --color --coverage-text
 
 all: vendor tests/data
 
-vendor: composer.json composer.lock
+vendor: composer.json
 	composer install $(COMPOSERFLAGS)
 	touch $@
 
