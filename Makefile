@@ -1,7 +1,7 @@
 INTERACTIVE    = $(shell [ -t 0 ] && echo 1)
 COMPOSERFLAGS +=
 PHPSTANFLAGS  += $(if $(INTERACTIVE),,--no-progress) $(if $(INTERACTIVE)$(CI),,--error-format=raw)
-PHPUNITFLAGS  += $(if $(INTERACTIVE)$(CI),--colors --coverage-text,--colors=never)
+PHPUNITFLAGS  += $(if $(INTERACTIVE)$(CI),--colors=always --coverage-text,--colors=never)
 
 all: vendor tests/data
 
@@ -15,7 +15,7 @@ tests/data:
 check: analyse test;
 
 analyse: vendor
-	vendor/bin/phpstan analyse src --level 9
+	vendor/bin/phpstan analyse src --level 9 $(PHPSTANFLAGS)
 
 test: vendor tests/data
 	XDEBUG_MODE=coverage vendor/bin/phpunit tests --coverage-filter='src' $(PHPUNITFLAGS)
