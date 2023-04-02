@@ -65,7 +65,7 @@ class SphinxInventoryParser
 			throw new UnexpectedValueException("third line is not a valid Version string: '$str'");
 		}
 		$zlibStr = fgets($stream);
-		if (!str_contains($zlibStr, 'zlib')) {
+		if (strpos($zlibStr, 'zlib') === false) {
 			$str = substr($zlibStr, 0, -1);
 			throw new UnexpectedValueException("fourth line does advertise zlib compression: '$str'");
 		}
