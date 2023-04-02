@@ -69,11 +69,11 @@ class SphinxInventoryParser
 			$str = substr($zlibStr, 0, -1);
 			throw new UnexpectedValueException("fourth line does advertise zlib compression: '$str'");
 		}
-		 // We need to skip the 2 octets of Zlib header because PHP's zlib.inflate
-		 // semms to be in fact only a DEFLATE filter.
-		 // See: <https://bugs.php.net/bug.php?id=68556>
-		fread($stream, 2);
-		stream_filter_append($stream, 'zlib.inflate', STREAM_FILTER_READ);
+		// We need to set window to 15 because PHP's zlib.inflate filter
+		// implements multiple formats depending on its value, and the
+		// default is in fact -15.
+		// See: <https://bugs.php.net/bug.php?id=71396>
+		stream_filter_append($stream, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15]);
 		$inventory = new SphinxInventory($project, $version);
 		while(($objectStr = fgets($stream)) !== false) {
 			if (strlen($objectStr) == 1 || $objectStr[0] == '#') {
