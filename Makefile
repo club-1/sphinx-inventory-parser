@@ -1,6 +1,6 @@
 INTERACTIVE    = $(shell [ -t 0 ] && echo 1)
 COMPOSERFLAGS +=
-PHPSTANFLAGS  += $(if $(INTERACTIVE),,--no-progress) $(if $(INTERACTIVE)$(CI),,--error-format=raw)
+PHPSTANFLAGS  += $(if $(INTERACTIVE),,--no-progress) $(if $(INTERACTIVE)$(CI),--ansi,--error-format=raw)
 PHPUNITFLAGS  += $(if $(INTERACTIVE)$(CI),--colors=always --coverage-text,--colors=never)
 
 all: vendor tests/data
