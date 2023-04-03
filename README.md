@@ -1,6 +1,6 @@
 # PHP Sphinx Inventory Parser
 
-[![License][licensvg]][licenurl]
+[![License LGPL-2.1-or-later][licensvg]][licenurl]
 ![PHP versions tested][phpvtsvg]
 [![build status][buildsvg]][buildurl]
 [![coverage report][coversvg]][coverurl]
@@ -17,6 +17,10 @@ The only requirement is PHP >= 7.3 with [Zlib extension](https://www.php.net/man
 (usually included).
 
 ## How to use it
+
+This library can be installed via [composer](https://getcomposer.org/):
+
+    composer require club-1/sphinx-inventory-parser
 
 It provides a single `parse()` function in `SphinxInventoryParser`
 that takes a readable resource, typically obtained with [`fopen()`](https://www.php.net/manual/en/function.fopen.php).
