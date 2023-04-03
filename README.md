@@ -6,7 +6,7 @@
 [![coverage report][coversvg]][coverurl]
 
 A PHP library to parse [Sphinx documentation](https://www.sphinx-doc.org/)'s object inventory file format
-as used by [intersphinx](https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.htm).
+as used by [intersphinx](https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html).
 It is loosely inspired from [sphobjinv](https://github.com/bskinn/sphobjinv),
 whose documentation have also been very useful
 by describing the [Sphinx objects.inv v2 Syntax](https://sphobjinv.readthedocs.io/en/stable/syntax.html).
