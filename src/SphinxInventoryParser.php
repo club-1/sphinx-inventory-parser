@@ -81,7 +81,7 @@ class SphinxInventoryParser
 			if (strlen($objectStr) == 1 || $objectStr[0] == '#') {
 				continue;
 			}
-			$result = preg_match('/(?x)(.+?)\s+(\S+):(\S+)\s+(-?\d+)\s+?(\S*)\s+(.*)/', $objectStr, $matches);
+			$result = preg_match('/(?x)(.+?)\s+([^\s:]+):(\S+)\s+(-?\d+)\s+?(\S*)\s+(.*)/', $objectStr, $matches);
 			if ($result !== 1) {
 				$str = substr($objectStr, 0, -1);
 				throw new UnexpectedValueException("object string did not match pattern: '$str'");

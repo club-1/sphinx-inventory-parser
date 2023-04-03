@@ -60,6 +60,17 @@ final class SphinxInventoryParserTest extends TestCase
 		$this->assertEquals('flux Web', $inventory->objects[0]->name);
 	}
 
+	public function testParseRoleColon(): void
+	{
+		$parser = new SphinxInventoryParser();
+		$stream = fopen(__DIR__ . '/data/role_colon.inv', 'r');
+		$inventory = $parser->parse($stream);
+		fclose($stream);
+		$this->assertCount(1, $inventory->objects);
+		$this->assertEquals('domain', $inventory->objects[0]->domain);
+		$this->assertEquals('role:colon', $inventory->objects[0]->role);
+	}
+
 	/**
 	 * @dataProvider parseExceptionsProvider
 	 */

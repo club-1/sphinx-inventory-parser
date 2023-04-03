@@ -1,4 +1,4 @@
-files = valid.inv skipped_lines.inv invalid_object.inv no_objects.inv name_whitespace.inv
+files = valid.inv skipped_lines.inv invalid_object.inv no_objects.inv name_whitespace.inv role_colon.inv
 
 all: $(files)
 
