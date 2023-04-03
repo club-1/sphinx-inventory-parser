@@ -18,7 +18,8 @@ The only requirement is PHP >= 7.3 with [Zlib extension](https://www.php.net/man
 
 ## How to use it
 
-This library can be installed via [composer](https://getcomposer.org/):
+This library is available on [packagist](https://packagist.org/packages/club-1/sphinx-inventory-parser)
+and can be installed via [composer](https://getcomposer.org/):
 
     composer require club-1/sphinx-inventory-parser
 
