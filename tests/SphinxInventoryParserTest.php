@@ -50,6 +50,16 @@ final class SphinxInventoryParserTest extends TestCase
 		$this->assertCount(1, $inventory->objects);
 	}
 
+	public function testParseNameWhitespace(): void
+	{
+		$parser = new SphinxInventoryParser();
+		$stream = fopen(__DIR__ . '/data/name_whitespace.inv', 'r');
+		$inventory = $parser->parse($stream);
+		fclose($stream);
+		$this->assertCount(1, $inventory->objects);
+		$this->assertEquals('flux Web', $inventory->objects[0]->name);
+	}
+
 	/**
 	 * @dataProvider parseExceptionsProvider
 	 */
