@@ -34,7 +34,7 @@ class SphinxInventoryParser
 	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
 	 */
 	public function parse($stream, string $baseURI = ''): SphinxInventory {
-		$versionStr = $this->ffgets($stream, 30);
+		$versionStr = $this->ffgets($stream, 32);
 		$result = sscanf($versionStr, '# Sphinx inventory version %d', $version);
 		if ($result !== 1) {
 			$str = substr($versionStr, 0, -1);

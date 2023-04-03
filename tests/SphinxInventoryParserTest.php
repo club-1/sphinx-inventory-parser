@@ -70,7 +70,7 @@ final class SphinxInventoryParserTest extends TestCase
 	{
 		return [
 			["empty.inv", "unexpected end of file"],
-			["invalid_sphinx.inv", "first line is not a valid Sphinx inventory version string: '# Invalid Sphinx inventory v'"],
+			["invalid_sphinx.inv", "first line is not a valid Sphinx inventory version string: '# Invalid Sphinx inventory ver'"],
 			["unsupported_inventory_version.inv", "unsupported Sphinx inventory version: 0"],
 			["invalid_project.inv", "second line is not a valid Project string: '# Invalid Project: CLUB1'"],
 			["invalid_version.inv", "third line is not a valid Version string: '# Invalid Version: 42'"],
