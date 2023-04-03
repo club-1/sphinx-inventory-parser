@@ -10,7 +10,7 @@ final class SphinxInventoryParserTest extends TestCase
 	public function testParseValid(): void
 	{
 		$parser = new SphinxInventoryParser();
-		$stream = fopen(__DIR__ . '/data/objects.inv.valid', 'r');
+		$stream = fopen(__DIR__ . '/data/valid.inv', 'r');
 		$inventory = $parser->parse($stream, 'https://club1.fr/docs/fr/');
 		fclose($stream);
 		$this->assertEquals('CLUB1', $inventory->project);
@@ -35,7 +35,7 @@ final class SphinxInventoryParserTest extends TestCase
 	public function testParseNoObjects(): void
 	{
 		$parser = new SphinxInventoryParser();
-		$stream = fopen(__DIR__ . '/data/objects.inv.no_objects', 'r');
+		$stream = fopen(__DIR__ . '/data/no_objects.inv', 'r');
 		$inventory = $parser->parse($stream);
 		fclose($stream);
 		$this->assertCount(0, $inventory->objects);
@@ -44,7 +44,7 @@ final class SphinxInventoryParserTest extends TestCase
 	public function testParseSkippedLines(): void
 	{
 		$parser = new SphinxInventoryParser();
-		$stream = fopen(__DIR__ . '/data/objects.inv.skipped_lines', 'r');
+		$stream = fopen(__DIR__ . '/data/skipped_lines.inv', 'r');
 		$inventory = $parser->parse($stream);
 		fclose($stream);
 		$this->assertCount(1, $inventory->objects);
@@ -69,34 +69,13 @@ final class SphinxInventoryParserTest extends TestCase
 	public function parseExceptionsProvider(): array
 	{
 		return [
-			[
-				'objects.inv.empty',
-				'unexpected end of file',
-			],
-			[
-				'objects.inv.invalid_sphinx',
-				"first line is not a valid Sphinx inventory version string: '# Invalid Sphinx inventory v'",
-			],
-			[
-				'objects.inv.unsupported_inventory_version',
-				"unsupported Sphinx inventory version: 0",
-			],
-			[
-				'objects.inv.invalid_project',
-				"second line is not a valid Project string: '# Invalid Project: CLUB1'",
-			],
-			[
-				'objects.inv.invalid_version',
-				"third line is not a valid Version string: '# Invalid Version: 42'",
-			],
-			[
-				'objects.inv.no_zlib',
-				"fourth line does advertise zlib compression: '# The remainder of this file is not compressed.'",
-			],
-			[
-				'objects.inv.invalid_object',
-				"object string did not match pattern: 'invalid sphinx inventory object line'",
-			],
+			["empty.inv", "unexpected end of file"],
+			["invalid_sphinx.inv", "first line is not a valid Sphinx inventory version string: '# Invalid Sphinx inventory v'"],
+			["unsupported_inventory_version.inv", "unsupported Sphinx inventory version: 0"],
+			["invalid_project.inv", "second line is not a valid Project string: '# Invalid Project: CLUB1'"],
+			["invalid_version.inv", "third line is not a valid Version string: '# Invalid Version: 42'"],
+			["no_zlib.inv", "fourth line does advertise zlib compression: '# The remainder of this file is not compressed.'"],
+			["invalid_object.inv", "object string did not match pattern: 'invalid sphinx inventory object line'"],
 		];
 	}
 }

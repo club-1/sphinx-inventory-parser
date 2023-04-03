@@ -1,5 +1,5 @@
 *.zz
-objects.inv.invalid_object
-objects.inv.no_objects
-objects.inv.skipped_lines
-objects.inv.valid
+invalid_object.inv
+no_objects.inv
+skipped_lines.inv
+valid.inv

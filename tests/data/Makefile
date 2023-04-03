@@ -1,11 +1,11 @@
-files = objects.inv.valid objects.inv.skipped_lines objects.inv.invalid_object objects.inv.no_objects
+files = valid.inv skipped_lines.inv invalid_object.inv no_objects.inv
 
 all: $(files)
 
-$(files): %: %.header %.data.zz
+%.inv: %.header %.data.zz
 	cat $^ > $@
 
-.INTERMEDIATE: $(files:=.data.zz)
+.INTERMEDIATE: $(files:.inv=.data.zz)
 %.zz: %
 	pigz --keep --zlib $<
 	@touch $@
