@@ -31,6 +31,9 @@ class SphinxInventoryParser
 	 * Parse a readable stream into an indexed :php:class:`SphinxInventory` object.
 	 *
 	 * @param resource	$stream		The resource to parse, opened in read mode.
+	 * @param string	$baseURI	The base string to prepend to an object's location to get its final URI.
+	 *
+	 * @return SphinxInventory		The inventory parsed from the stream.
 	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
 	 */
 	public function parse($stream, string $baseURI = ''): SphinxInventory {
@@ -49,8 +52,8 @@ class SphinxInventoryParser
 	}
 
 	/**
-	 * @ignore
 	 * @param resource $stream
+	 * @ignore
 	 */
 	protected function parseV2($stream, string $baseURI): SphinxInventory {
 		$projectStr = $this->ffgets($stream);
@@ -108,7 +111,9 @@ class SphinxInventoryParser
 	 *
 	 * @param resource		$stream		The resource to read from.
 	 * @param int<0, max>|null	$length		Max length to read.
+	 *
 	 * @throws UnexpectedValueException	If no line is readeble.
+	 * @ignore
 	 */
 	protected function ffgets($stream, ?int $length = null): string
 	{

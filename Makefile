@@ -11,9 +11,8 @@ vendor: composer.json
 	touch $@
 
 docs/api/%.rst: src/%.php vendor
-	echo $* > $@
-	echo $* | sed "s/./=/g" >> $@
-	vendor/bin/doxphp < $< | vendor/bin/doxphp2sphinx >> $@
+	(echo $*; echo $* | sed "s/./=/g") > $@
+	vendor/bin/doxphp < $< | vendor/bin/doxphp2sphinx | tail -n+2 >> $@
 
 docs: $(patsubst src/%.php,docs/api/%.rst,$(SRC))
 	$(MAKE) -C $@ html
