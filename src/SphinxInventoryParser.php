@@ -28,7 +28,7 @@ use UnexpectedValueException;
 class SphinxInventoryParser
 {
 	/**
-	 * Parse a readable stream into an indexed SphinxInventory object.
+	 * Parse a readable stream into an indexed :php:class:`SphinxInventory` object.
 	 *
 	 * @param resource	$stream		The resource to parse, opened in read mode.
 	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
@@ -49,6 +49,7 @@ class SphinxInventoryParser
 	}
 
 	/**
+	 * @ignore
 	 * @param resource $stream
 	 */
 	protected function parseV2($stream, string $baseURI): SphinxInventory {

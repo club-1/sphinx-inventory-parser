@@ -1,5 +1,6 @@
 # Project files
 vendor/
+docs/_build
 
 # Other common files
 *.orig
