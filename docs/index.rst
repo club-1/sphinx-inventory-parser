@@ -3,13 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to PHP Sphinx Inventory Parser's documentation!
-=======================================================
+PHP Sphinx Inventory Parser
+===========================
+
+
 
 .. toctree::
    :maxdepth: 2
    :glob:
-   :caption: Contents:
+   :caption: API Reference
 
    api/*
 
@@ -19,5 +21,4 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
