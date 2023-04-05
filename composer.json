@@ -23,6 +23,12 @@
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9"
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/club-1/doxphp"
+        }
+    ],
     "config": {
         "sort-packages": true
     }
