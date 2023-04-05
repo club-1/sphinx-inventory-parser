@@ -12,7 +12,8 @@ vendor: composer.json
 
 docs/api/%.rst: src/%.php vendor
 	(echo $*; echo $* | sed "s/./=/g") > $@
-	vendor/bin/doxphp < $< | vendor/bin/doxphp2sphinx | tail -n+2 >> $@
+	vendor/bin/doxphp < $< | vendor/bin/doxphp2sphinx \
+	| grep -vE '(php:namespace::|:var:)' >> $@
 
 docs: $(patsubst src/%.php,docs/api/%.rst,$(SRC))
 	$(MAKE) -C $@ html

@@ -25,10 +25,27 @@ namespace Club1\SphinxInventoryParser;
 
 use UnexpectedValueException;
 
+/**
+ * Parser for Sphinx objects.inv inventory file format.
+ *
+ * This is the main class of the library. Each instance provide a single public
+ * method :meth:`~SphinxInventoryParser::parse`, which allows to parse a stream
+ * of data into a PHP object.
+ */
 class SphinxInventoryParser
 {
 	/**
-	 * Parse a readable stream into an indexed :php:class:`SphinxInventory` object.
+	 * Parse a readable stream into an indexed :class:`SphinxInventory` object.
+	 *
+	 * Such a stream is usually obtained with `fopen`_, using the ``r`` mode.
+	 * For example, with a remote file over HTTPS it is possible to do this::
+	 *
+	 *    $parser = new SphinxInventoryParser();
+	 *    $stream = fopen('https://club1.fr/docs/fr/objects.inv', 'r');
+	 *    $inventory = $parser->parse($stream, 'https://club1.fr/docs/fr/');
+	 *    fclose($stream);
+	 *
+	 * .. _fopen: https://www.php.net/manual/en/function.fopen.php
 	 *
 	 * @param resource	$stream		The resource to parse, opened in read mode.
 	 * @param string	$baseURI	The base string to prepend to an object's location to get its final URI.

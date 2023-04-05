@@ -23,10 +23,27 @@
 
 namespace Club1\SphinxInventoryParser;
 
+/**
+ * Data class of a Sphinx object.
+ *
+ * All of its properties are public as it is only meant to be a data structure.
+ * The values are expanded while parsing, so no more processing need to be done.
+ */
 class SphinxObject {
-	/** @var string $name */
+	/**
+	 * Name of the object.
+	 *
+	 * This property, combined with :attr:`~SphinxObject::$domain` and
+	 * :attr:`~SphinxObject::$role` form the identifier of the object.
+	 *
+	 * @var string $name
+	 */
 	public $name;
-	/** @var string $domain */
+	/**
+	 * Domain of the object.
+	 *
+	 * @var string $domain
+	 */
 	public $domain;
 	/** @var string $role */
 	public $role;
