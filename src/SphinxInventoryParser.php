@@ -119,7 +119,8 @@ class SphinxInventoryParser
 				$str = substr($objectStr, 0, -1);
 				throw new UnexpectedValueException("object string did not match pattern: '$str'");
 			}
-			list($_, $name, $domain, $role, $priority, $location, $displayName) = $matches;
+			array_shift($matches);
+			list($name, $domain, $role, $priority, $location, $displayName) = $matches;
 			if ($location[-1] == '$') {
 				$location = substr($location, 0, -1) . $name;
 			}
