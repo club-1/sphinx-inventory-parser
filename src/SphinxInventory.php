@@ -24,22 +24,59 @@
 namespace Club1\SphinxInventoryParser;
 
 class SphinxInventory {
-	/** @var string $project */
-	public $project;
-	/** @var string $version */
-	public $version;
-	/** @var SphinxObject[] $objects */
-	public $objects = [];
-	/** @var SphinxObject[][][] $domains */
-	public $domains = [];
-	
 
+	/**
+	 * ``string`` -- Name of the project of the inventory.
+	 *
+	 * @var string $project
+	 */
+	public $project;
+
+	/**
+	 * ``string`` -- Version of the project of the inventory.
+	 *
+	 * @var string $version
+	 */
+	public $version;
+
+	/**
+	 * :class:`SphinxObject[] <SphinxObject>` -- List of all Sphinx objects of the inventory.
+	 *
+	 * @var SphinxObject[] $objects
+	 */
+	public $objects = [];
+
+	/**
+	 * :class:`SphinxObject[][][] <SphinxObject>` -- Tree index of the objects of the inventory.
+	 *
+	 * This index allows to find the objects faster. It is a multi-level hashmap
+	 * indexed with the :attr:`~SphinxObject::$domain`, :attr:`~SphinxObject::$role`
+	 * and :attr:`~SphinxObject::$name` of the objects.
+	 * For example, the object of the glossary :any:`term` ``API`` can be retrieved like so::
+	 *
+	 *    $APIObject = $inventory->domains['std']['term']['API'];
+	 *
+	 * @var SphinxObject[][][] $domains
+	 */
+	public $domains = [];
+
+	/**
+	 * Basic constructor.
+	 */
 	public function __construct(string $project, string $version)
 	{
 		$this->project = $project;
 		$this->version = $version;
 	}
 
+	/**
+	 * Add a Sphinx object to the inventory.
+	 *
+	 * The object will be added both to the :attr:`~SphinxInventory::$objects` array and
+	 * the :attr:`~SphinxInventory::$domains` index.
+	 *
+	 * @param SphinxObject $object The object to add.
+	 */
 	public function addObject(SphinxObject $object): void
 	{
 		$this->objects[] = $object;

@@ -30,8 +30,9 @@ namespace Club1\SphinxInventoryParser;
  * The values are expanded while parsing, so no more processing need to be done.
  */
 class SphinxObject {
+
 	/**
-	 * Name of the object.
+	 * ``string`` -- Name of the object.
 	 *
 	 * This property, combined with :attr:`~SphinxObject::$domain` and
 	 * :attr:`~SphinxObject::$role` form the identifier of the object.
@@ -39,21 +40,64 @@ class SphinxObject {
 	 * @var string $name
 	 */
 	public $name;
+
 	/**
-	 * Domain of the object.
+	 * ``string`` -- Domain of the object.
+	 *
+	 * See :external:doc:`usage/restructuredtext/domains` in Sphinx documentation
+	 * for more information.
 	 *
 	 * @var string $domain
 	 */
 	public $domain;
-	/** @var string $role */
+
+	/**
+	 * ``string`` -- Role of the object.
+	 *
+	 * See :external:doc:`usage/restructuredtext/roles` in Sphinx documentation
+	 * for more information.
+	 *
+	 * @var string $role
+	 */
 	public $role;
-	/** @var int $priority */
+
+	/**
+	 * ``int`` -- Priority of the object.
+	 *
+	 * Used by Sphinx to order search results.
+	 * See also :external:ref:`{priority}` in Sphobjinv documentation.
+	 *
+	 * @var int $priority
+	 */
 	public $priority;
-	/** @var string $uri */
+
+	/**
+	 * ``string`` -- Full URI of the object.
+	 *
+	 * The fully resolved URI of the object. It has been expanded by
+	 * :class:`SphinxInventoryParser::parse` and can be used as is.
+	 *
+	 * @var string $uri
+	 */
 	public $uri;
-	/** @var string $displayName */
+
+	/**
+	 * ``string`` -- Display name of the object.
+	 *
+	 * The value to use when displaying the object in a document.
+	 * It is often the same as the :attr:`~SphinxObject::$name` but can differ
+	 * occasionally. It has been expanded by :class:`SphinxInventoryParser::parse`
+	 * and can be used as is.
+	 *
+	 * @var string $displayName
+	 */
 	public $displayName;
 
+	/**
+	 * Basic constructor.
+	 *
+	 * Simply assign the properties of the objects with the given values.
+	 */
 	public function __construct(string $name, string $domain, string $role, int $priority, string $uri, string $displayName)
 	{
 		$this->name = $name;

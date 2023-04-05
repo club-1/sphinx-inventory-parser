@@ -17,7 +17,15 @@ release = '0.2.0'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinxcontrib.phpdomain']
+extensions = [
+    'sphinxcontrib.phpdomain',
+    'sphinx.ext.intersphinx',
+]
+
+intersphinx_mapping = {
+    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
+    'sphobjinv': ('https://sphobjinv.readthedocs.io/en/stable/', None),
+}
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']

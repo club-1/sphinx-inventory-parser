@@ -37,13 +37,25 @@ class SphinxInventoryParser
 	/**
 	 * Parse a readable stream into an indexed :class:`SphinxInventory` object.
 	 *
-	 * Such a stream is usually obtained with `fopen`_, using the ``r`` mode.
+	 * Such a stream is usually obtained with |fopen|_, using the ``r`` mode.
 	 * For example, with a remote file over HTTPS it is possible to do this::
 	 *
 	 *    $parser = new SphinxInventoryParser();
 	 *    $stream = fopen('https://club1.fr/docs/fr/objects.inv', 'r');
 	 *    $inventory = $parser->parse($stream, 'https://club1.fr/docs/fr/');
 	 *    fclose($stream);
+	 *
+	 * The :external:doc:`syntax` encode some values in a compressed form:
+	 *
+	 * - The :ref:`{uri}` part is encoded as a relative path that can end with
+	 *   a ``$`` which needs to be replaced by the name of the object.
+	 * - The :ref:`{dispname}` part can be a ``-`` when it is the identical to
+	 *   the name of the object.
+	 *
+	 * These are expanded before creating the :class:`SphinxObjects <SphinxObject>`
+	 * so that no more processing needs to be done later.
+	 *
+	 * .. |fopen| replace:: ``fopen``
 	 *
 	 * .. _fopen: https://www.php.net/manual/en/function.fopen.php
 	 *
