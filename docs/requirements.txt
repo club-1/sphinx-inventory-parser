@@ -1,2 +1,2 @@
-sphinx==4.5.0
-sphinxcontrib-phpdomain
+sphinx
+sphinxcontrib-phpdomain @ git+https://github.com/n-peugnet/sphinxcontrib-phpdomain@contents-entries

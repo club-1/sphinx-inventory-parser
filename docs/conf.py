@@ -35,6 +35,8 @@ lexers['php-annotations'] = PhpLexer(startinline=True)
 primary_domain = 'php'
 highlight_language = 'php'
 
+toc_object_entries_show_parents = 'hide'
+
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
