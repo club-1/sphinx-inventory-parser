@@ -9,7 +9,7 @@ PHP Sphinx Inventory Parser
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :glob:
    :caption: API Reference
 

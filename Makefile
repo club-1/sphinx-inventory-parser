@@ -14,7 +14,6 @@ docs/api/%.rst: src/%.php vendor
 	(echo $*; echo $* | sed "s/./=/g") > $@
 	vendor/bin/doxphp < $< | vendor/bin/doxphp2sphinx \
 	| grep -vE '(php:namespace::|:var:)' \
-	| sed -e '/php:class::/a \ \ \ :nocontentsentry:' \
 	>> $@
 
 docs: $(patsubst src/%.php,docs/api/%.rst,$(SRC))
