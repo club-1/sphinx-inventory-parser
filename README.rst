@@ -31,9 +31,10 @@ and can be installed via `composer <https://getcomposer.org/>`_:
 Simple example
 --------------
 
-The main function it provides is :meth:`SphinxInventoryParser::parse()`
+The main function it provides is |SphinxInventoryParser::parse()|
 that takes a readable resource, typically obtained with |fopen()|_
-and returns a :class:`SphinxInventory` objects.
+and returns a |SphinxInventory| object.
+
 
 .. |fopen()| replace:: ``fopen()``
 
@@ -91,6 +92,10 @@ Build scripts
    make clean  # Clean all downloaded and generated files.
 
 .. Epilog .. ..................................................................
+
+.. |SphinxInventoryParser::parse()| replace:: ``SphinxInventoryParser::parse()``
+
+.. |SphinxInventory| replace:: ``SphinxInventory``
 
 .. |License LGPL-2.1-or-later| image:: https://img.shields.io/badge/license-LGPL--2.1--or--later-blue
    :target: LICENSE
