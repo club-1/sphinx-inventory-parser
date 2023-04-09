@@ -10,15 +10,14 @@ PHP Sphinx Inventory Parser
 
 .. toctree::
    :maxdepth: 3
-   :glob:
-   :caption: API Reference
+   :caption: Contents
 
-   api/*
+   getting-started
+   api
+   development
 
+.. toctree::
+   :caption: Indices and tables
 
+   genindex
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
