@@ -1,2 +1,2 @@
 sphinx
-sphinxcontrib-phpdomain @ git+https://github.com/n-peugnet/sphinxcontrib-phpdomain@contents-entries
+sphinxcontrib-phpdomain
