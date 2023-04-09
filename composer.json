@@ -3,6 +3,10 @@
     "description": "Parse Sphinx documentation's object.inv inventory file format into an indexed SphinxInventory object.",
     "type": "library",
     "license": "LGPL-2.1-or-later",
+    "homepage": "https://github.com/club-1/sphinx-inventory-parser",
+    "support": {
+        "docs": "https://club-1.github.io/sphinx-inventory-parser/"
+    },
     "autoload": {
         "psr-4": {
             "Club1\\SphinxInventoryParser\\": "src/"

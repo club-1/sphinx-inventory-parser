@@ -1,7 +1,7 @@
 PHP Sphinx Inventory Parser
 ===========================
 
-|License LGPL-2.1-or-later| |PHP versions tested| |build status| |coverage report|
+|License LGPL-2.1-or-later| |PHP versions tested| |build status| |coverage report| |docs status|
 
 .. Introduction .. ............................................................
 
@@ -104,3 +104,6 @@ Build scripts
    :target: https://github.com/club-1/sphinx-inventory-parser/actions/workflows/build.yml?query=branch%3Amain
 .. |coverage report| image:: https://img.shields.io/codecov/c/gh/club-1/sphinx-inventory-parser
    :target: https://app.codecov.io/gh/club-1/sphinx-inventory-parser
+
+.. |docs status| image:: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/docs.yml?label=docs
+   :target: https://club-1.github.io/sphinx-inventory-parser/
