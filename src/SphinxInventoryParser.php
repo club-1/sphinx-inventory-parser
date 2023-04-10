@@ -35,7 +35,13 @@ use UnexpectedValueException;
 class SphinxInventoryParser
 {
 	/**
-	 * Parse a readable stream into an indexed :class:`SphinxInventory` object.
+	 * @var resource $stream
+	 * @ignore
+	 */
+	protected $stream;
+
+	/**
+	 * Create a :class:`SphinxInventoryParser` for the given stream.
 	 *
 	 * Such a stream is usually obtained with |fopen|_, using the ``r`` mode.
 	 * For example, with a remote file over HTTPS it is possible to do this::
@@ -44,6 +50,18 @@ class SphinxInventoryParser
 	 *    $stream = fopen('https://club1.fr/docs/fr/objects.inv', 'r');
 	 *    $inventory = $parser->parse($stream, 'https://club1.fr/docs/fr/');
 	 *    fclose($stream);
+	 *
+	 * .. |fopen| replace:: ``fopen``
+	 * .. _fopen: https://www.php.net/manual/en/function.fopen.php
+	 *
+	 * @param resource	$stream		The resource to parse, opened in read mode.
+	 */
+	public function __construct($stream) {
+		$this->stream = $stream;
+	}
+
+	/**
+	 * Parse the stream into an indexed :class:`SphinxInventory` object.
 	 *
 	 * The :external:doc:`syntax` encode some values in a compressed form:
 	 *
@@ -55,18 +73,13 @@ class SphinxInventoryParser
 	 * These are expanded before creating the :class:`SphinxObjects <SphinxObject>`
 	 * so that no more processing needs to be done later.
 	 *
-	 * .. |fopen| replace:: ``fopen``
-	 *
-	 * .. _fopen: https://www.php.net/manual/en/function.fopen.php
-	 *
-	 * @param resource	$stream		The resource to parse, opened in read mode.
 	 * @param string	$baseURI	The base string to prepend to an object's location to get its final URI.
 	 *
 	 * @return SphinxInventory		The inventory parsed from the stream.
 	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
 	 */
-	public function parse($stream, string $baseURI = ''): SphinxInventory {
-		$versionStr = $this->ffgets($stream, 32);
+	public function parse(string $baseURI = ''): SphinxInventory {
+		$versionStr = $this->ffgets($this->stream, 32);
 		$result = sscanf($versionStr, '# Sphinx inventory version %d', $version);
 		if ($result !== 1) {
 			$str = substr($versionStr, 0, -1);
@@ -74,7 +87,7 @@ class SphinxInventoryParser
 		}
 		switch($version) {
 			case 2:
-				return $this->parseV2($stream, $baseURI);
+				return $this->parseV2($this->stream, $baseURI);
 			default:
 				throw new UnexpectedValueException("unsupported Sphinx inventory version: $version");
 		}

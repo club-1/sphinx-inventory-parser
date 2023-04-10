@@ -9,9 +9,9 @@ final class SphinxInventoryParserTest extends TestCase
 {
 	public function testParseValid(): void
 	{
-		$parser = new SphinxInventoryParser();
 		$stream = fopen(__DIR__ . '/data/valid.inv', 'r');
-		$inventory = $parser->parse($stream, 'https://club1.fr/docs/fr/');
+		$parser = new SphinxInventoryParser($stream);
+		$inventory = $parser->parse('https://club1.fr/docs/fr/');
 		fclose($stream);
 		$this->assertEquals('CLUB1', $inventory->project);
 		$this->assertEquals('main', $inventory->version);
@@ -34,27 +34,27 @@ final class SphinxInventoryParserTest extends TestCase
 
 	public function testParseNoObjects(): void
 	{
-		$parser = new SphinxInventoryParser();
 		$stream = fopen(__DIR__ . '/data/no_objects.inv', 'r');
-		$inventory = $parser->parse($stream);
+		$parser = new SphinxInventoryParser($stream);
+		$inventory = $parser->parse();
 		fclose($stream);
 		$this->assertCount(0, $inventory->objects);
 	}
 
 	public function testParseSkippedLines(): void
 	{
-		$parser = new SphinxInventoryParser();
 		$stream = fopen(__DIR__ . '/data/skipped_lines.inv', 'r');
-		$inventory = $parser->parse($stream);
+		$parser = new SphinxInventoryParser($stream);
+		$inventory = $parser->parse();
 		fclose($stream);
 		$this->assertCount(1, $inventory->objects);
 	}
 
 	public function testParseNameWhitespace(): void
 	{
-		$parser = new SphinxInventoryParser();
 		$stream = fopen(__DIR__ . '/data/name_whitespace.inv', 'r');
-		$inventory = $parser->parse($stream);
+		$parser = new SphinxInventoryParser($stream);
+		$inventory = $parser->parse();
 		fclose($stream);
 		$this->assertCount(1, $inventory->objects);
 		$this->assertEquals('flux Web', $inventory->objects[0]->name);
@@ -62,9 +62,9 @@ final class SphinxInventoryParserTest extends TestCase
 
 	public function testParseRoleColon(): void
 	{
-		$parser = new SphinxInventoryParser();
 		$stream = fopen(__DIR__ . '/data/role_colon.inv', 'r');
-		$inventory = $parser->parse($stream);
+		$parser = new SphinxInventoryParser($stream);
+		$inventory = $parser->parse();
 		fclose($stream);
 		$this->assertCount(1, $inventory->objects);
 		$this->assertEquals('domain', $inventory->objects[0]->domain);
@@ -78,9 +78,9 @@ final class SphinxInventoryParserTest extends TestCase
 	{
 		$this->expectException(UnexpectedValueException::class);
 		$this->expectExceptionMessage($message);
-		$parser = new SphinxInventoryParser();
 		$stream = fopen(__DIR__ . "/data/$file", 'r');
-		$parser->parse($stream);
+		$parser = new SphinxInventoryParser($stream);
+		$parser->parse();
 		fclose($stream);
 	}
 
