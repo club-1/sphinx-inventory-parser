@@ -1,6 +1,8 @@
 <?php
 
+use Club1\SphinxInventoryParser\SphinxInventoryHeader;
 use Club1\SphinxInventoryParser\SphinxInventoryParser;
+use Club1\SphinxInventoryParser\SphinxObject;
 use PHPUnit\Framework\TestCase;
 
 require 'vendor/autoload.php';
@@ -98,5 +100,28 @@ final class SphinxInventoryParserTest extends TestCase
 			["no_zlib.inv", "fourth line does advertise zlib compression: '# The remainder of this file is not compressed.'"],
 			["invalid_object.inv", "object string did not match pattern: 'invalid sphinx inventory object line'"],
 		];
+	}
+
+	public function testParseManualValid(): void
+	{
+		$count = 0;
+		$stream = fopen(__DIR__ . "/data/valid.inv", 'r');
+		$parser = new SphinxInventoryParser($stream);
+		$header = $parser->parseHeader();
+		foreach ($parser->parseObjects($header) as $_) {
+			$count++;
+		}
+		$this->assertEquals(334, $count);
+	}
+
+	public function testParseObjectsUnsupportedVersion(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage("unsupported Sphinx inventory version: 3");
+		$stream = fopen(__DIR__ . "/data/valid.data", 'r');
+		$parser = new SphinxInventoryParser($stream);
+		$header = new SphinxInventoryHeader(3);
+		$parser->parseObjects($header);
+		fclose($stream);
 	}
 }

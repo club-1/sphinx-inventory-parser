@@ -24,14 +24,17 @@
 namespace Club1\SphinxInventoryParser;
 
 use Generator;
+use InvalidArgumentException;
 use UnexpectedValueException;
 
 /**
  * Parser for Sphinx objects.inv inventory file format.
  *
- * This is the main class of the library. Each instance provide a single public
- * method :meth:`~SphinxInventoryParser::parse`, which allows to parse a stream
- * of data into a PHP object.
+ * This is the main class of the library. Each instance provide a public method
+ * :meth:`parse()`, which allows to parse a stream of data into a PHP object.
+ *
+ * For more control over the parsing, the underlying methods :meth:`parseHeader()`
+ * and :meth:`parseObjects()` can be used directly.
  */
 class SphinxInventoryParser
 {
@@ -47,9 +50,9 @@ class SphinxInventoryParser
 	 * Such a stream is usually obtained with |fopen|_, using the ``r`` mode.
 	 * For example, with a remote file over HTTPS it is possible to do this::
 	 *
-	 *    $parser = new SphinxInventoryParser();
 	 *    $stream = fopen('https://club1.fr/docs/fr/objects.inv', 'r');
-	 *    $inventory = $parser->parse($stream, 'https://club1.fr/docs/fr/');
+	 *    $parser = new SphinxInventoryParser($stream);
+	 *    $inventory = $parser->parse('https://club1.fr/docs/fr/');
 	 *    fclose($stream);
 	 *
 	 * .. |fopen| replace:: ``fopen``
@@ -80,40 +83,59 @@ class SphinxInventoryParser
 	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
 	 */
 	public function parse(string $baseURI = ''): SphinxInventory {
+		$header = $this->parseHeader();
+		$inventory = new SphinxInventory($header->projectName, $header->projectVersion);
+		foreach($this->parseObjects($header, $baseURI) as $object) {
+			$inventory->addObject($object);
+		}
+		return $inventory;
+	}
+
+	/**
+	 * Parse only the header of the stream.
+	 *
+	 * Read the first line of the stream to determine the inventory version,
+	 * then, if the version is supported, parse the rest of the header.
+	 *
+	 * This consumes the header part of the stream, leaving only the objects
+	 * part, ready to be parsed by :meth:`parseObjects()`.
+	 *
+	 * @return SphinxInventoryHeader	The header of the inventory.
+	 * @throws UnexpectedValueException	If an unexpected value is encoutered while parsing.
+	 */
+	public function parseHeader(): SphinxInventoryHeader {
+		$header = new SphinxInventoryHeader();
 		$versionStr = $this->ffgets($this->stream, 32);
-		$result = sscanf($versionStr, '# Sphinx inventory version %d', $version);
+		$result = sscanf($versionStr, '# Sphinx inventory version %d', $header->version);
 		if ($result !== 1) {
 			$str = substr($versionStr, 0, -1);
 			throw new UnexpectedValueException("first line is not a valid Sphinx inventory version string: '$str'");
 		}
-		switch($version) {
+		switch($header->version) {
 			case 2:
-				return $this->parseV2($this->stream, $baseURI);
+				return $this->parseHeaderV2($header);
 			default:
-				throw new UnexpectedValueException("unsupported Sphinx inventory version: $version");
+				throw new UnexpectedValueException("unsupported Sphinx inventory version: $header->version");
 		}
 	}
 
 	/**
-	 * @param resource $stream
 	 * @ignore
 	 */
-	protected function parseV2($stream, string $baseURI): SphinxInventory {
-		$projectStr = $this->ffgets($stream);
-		$result = sscanf($projectStr, '# Project: %s', $project);
+	protected function parseHeaderV2(SphinxInventoryHeader $header): SphinxInventoryHeader {
+		$projectStr = $this->ffgets($this->stream);
+		$result = sscanf($projectStr, '# Project: %s', $header->projectName);
 		if ($result !== 1) {
 			$str = substr($projectStr, 0, -1);
 			throw new UnexpectedValueException("second line is not a valid Project string: '$str'");
 		}
-		assert(is_string($project), '$project must be a string');
-		$versionStr = $this->ffgets($stream);
-		$result = sscanf($versionStr, '# Version: %s', $version);
+		$versionStr = $this->ffgets($this->stream);
+		$result = sscanf($versionStr, '# Version: %s', $header->projectVersion);
 		if ($result !== 1) {
 			$str = substr($versionStr, 0, -1);
 			throw new UnexpectedValueException("third line is not a valid Version string: '$str'");
 		}
-		assert(is_string($version), '$version must be a string');
-		$zlibStr = $this->ffgets($stream);
+		$zlibStr = $this->ffgets($this->stream);
 		if (strpos($zlibStr, 'zlib') === false) {
 			$str = substr($zlibStr, 0, -1);
 			throw new UnexpectedValueException("fourth line does advertise zlib compression: '$str'");
@@ -122,20 +144,41 @@ class SphinxInventoryParser
 		// implements multiple formats depending on its value, and the
 		// default is in fact -15.
 		// See: <https://bugs.php.net/bug.php?id=71396>
-		stream_filter_append($stream, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15]);
-		$inventory = new SphinxInventory($project, $version);
-		foreach($this->parseObjectsV2($stream, $baseURI) as $object) {
-			$inventory->addObject($object);
-		}
-		return $inventory;
+		stream_filter_append($this->stream, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15]);
+		return $header;
 	}
 
 	/**
-	 * @param resource $stream
-	 * @return Generator & iterable<int, SphinxObject>
+	 * Parse the objects part of the stream.
+	 *
+	 * Read the stream as if it consists only of the objects part.
+	 * This function assumes that nothing remains in the stream but
+	 * the uncompressed list of objects. If the stream contains a
+	 * standard inventory, :meth:`parseHeader()`
+	 * must be called beforehand.
+	 *
+	 * @param SphinxInventoryHeader	$header	The header of the inventory, obtained via :meth:`parseHeader()` or manually created.
+	 * @param string	$baseURI	The base string to prepend to an object's location to get its final URI.
+	 *
+	 * @return Generator&iterable<int,SphinxObject>	An iterator of :class:`SphinxObject` objects.
+	 * @throws InvalidArgumentException	If the inventory version given in the header is unsupported.
+	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
 	 */
-	protected function parseObjectsV2($stream, string $baseURI): Generator {
-		while(($objectStr = fgets($stream)) !== false) {
+	public function parseObjects(SphinxInventoryHeader $header, string $baseURI = ''): Generator {
+		switch($header->version) {
+			case 2:
+				return $this->parseObjectsV2($baseURI);
+			default:
+				throw new InvalidArgumentException("unsupported Sphinx inventory version: $header->version");
+		}
+	}
+
+	/**
+	 * @return Generator&iterable<int,SphinxObject>
+	 * @ignore
+	 */
+	protected function parseObjectsV2(string $baseURI): Generator {
+		while(($objectStr = fgets($this->stream)) !== false) {
 			if (strlen($objectStr) == 1 || $objectStr[0] == '#') {
 				continue;
 			}
@@ -155,7 +198,7 @@ class SphinxInventoryParser
 			}
 			yield new SphinxObject($name, $domain, $role, intval($priority), $uri, $displayName);
 		}
-		if (!feof($stream)) {
+		if (!feof($this->stream)) {
 			throw new UnexpectedValueException('could not read until end of stream'); // @codeCoverageIgnore
 		}
 	}

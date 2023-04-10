@@ -10,3 +10,7 @@ API Reference
 -------------------
 
 .. include:: api/SphinxObject.rst
+
+-------------------
+
+.. include:: api/SphinxInventoryHeader.rst

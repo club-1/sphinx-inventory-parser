@@ -75,7 +75,7 @@ class SphinxObject {
 	 * ``string`` -- Full URI of the object.
 	 *
 	 * The fully resolved URI of the object. It has been expanded by
-	 * :class:`SphinxInventoryParser::parse` and can be used as is.
+	 * :class:`SphinxInventoryParser` and can be used as is.
 	 *
 	 * @var string $uri
 	 */
@@ -86,7 +86,7 @@ class SphinxObject {
 	 *
 	 * The value to use when displaying the object in a document.
 	 * It is often the same as the :attr:`~SphinxObject::$name` but can differ
-	 * occasionally. It has been expanded by :class:`SphinxInventoryParser::parse`
+	 * occasionally. It has been expanded by :class:`SphinxInventoryParser`
 	 * and can be used as is.
 	 *
 	 * @var string $displayName
