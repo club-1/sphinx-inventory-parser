@@ -3,7 +3,13 @@ Usage
 
 This is a quite simple library but it tries to be as flexible as possible,
 so there are multiple ways to use it.
-The simplest one is demonstrated in the :ref:`simple-example` section.
+
+.. include:: ../README.rst
+   :start-after: .. Example
+   :end-before: .. Documentation
+
+.. |SphinxInventoryParser::parse()| replace:: :meth:`SphinxInventoryParser::parse()`
+.. |SphinxInventory| replace:: :class:`SphinxInventory`
 
 Parse objects one by one
 ------------------------

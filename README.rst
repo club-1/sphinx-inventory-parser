@@ -28,12 +28,12 @@ and can be installed via `composer <https://getcomposer.org/>`_:
 
    composer require club-1/sphinx-inventory-parser
 
-.. _simple-example:
+.. Example .. .................................................................
 
 Simple example
 --------------
 
-The main function it provides is |SphinxInventoryParser::parse()|
+The simplest way to use it is with |SphinxInventoryParser::parse()|
 that parses a readable resource, typically obtained with |fopen()|_
 and returns a |SphinxInventory| object.
 

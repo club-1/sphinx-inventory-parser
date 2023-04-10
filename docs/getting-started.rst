@@ -3,11 +3,6 @@ Getting started
 
 .. include:: ../README.rst
    :start-after: .. Introduction
-   :end-before: .. Documentation
+   :end-before: .. Example
 
-See :doc:`usage` section for more examples.
-
-
-.. |SphinxInventoryParser::parse()| replace:: :meth:`SphinxInventoryParser::parse()`
-
-.. |SphinxInventory| replace:: :class:`SphinxInventory`
+See :doc:`usage` section for usage examples.
