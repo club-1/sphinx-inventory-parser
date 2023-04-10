@@ -1,0 +1,11 @@
+/************* Alabaster Theme customizations. *************/
+
+/* Add some space between PHP doc elements. */
+dl.php > dt {
+  margin-top: 30px;
+}
+
+/* Fix broken whitespace pygments stylesheet. */
+.highlight .w {
+  text-decoration: none;
+}

@@ -48,3 +48,6 @@ html_theme_options = {
     'navigation_with_keys': True,
     'show_relbar_bottom': True,
 }
+html_css_files = [
+    'custom.css',
+]
