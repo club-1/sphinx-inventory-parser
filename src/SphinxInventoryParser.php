@@ -23,6 +23,7 @@
 
 namespace Club1\SphinxInventoryParser;
 
+use Generator;
 use UnexpectedValueException;
 
 /**
@@ -123,6 +124,17 @@ class SphinxInventoryParser
 		// See: <https://bugs.php.net/bug.php?id=71396>
 		stream_filter_append($stream, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15]);
 		$inventory = new SphinxInventory($project, $version);
+		foreach($this->parseObjectsV2($stream, $baseURI) as $object) {
+			$inventory->addObject($object);
+		}
+		return $inventory;
+	}
+
+	/**
+	 * @param resource $stream
+	 * @return Generator & iterable<int, SphinxObject>
+	 */
+	protected function parseObjectsV2($stream, string $baseURI): Generator {
 		while(($objectStr = fgets($stream)) !== false) {
 			if (strlen($objectStr) == 1 || $objectStr[0] == '#') {
 				continue;
@@ -141,12 +153,11 @@ class SphinxInventoryParser
 			if ($displayName == '-') {
 				$displayName = $name;
 			}
-			$inventory->addObject(new SphinxObject($name, $domain, $role, intval($priority), $uri, $displayName));
+			yield new SphinxObject($name, $domain, $role, intval($priority), $uri, $displayName);
 		}
 		if (!feof($stream)) {
 			throw new UnexpectedValueException('could not read until end of stream'); // @codeCoverageIgnore
 		}
-		return $inventory;
 	}
 
 	/**
