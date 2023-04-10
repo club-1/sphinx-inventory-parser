@@ -26,7 +26,7 @@ and :meth:`~SphinxInventoryParser::parseObjects()` directly:
    $stream = fopen('https://club1.fr/docs/fr/objects.inv', 'r');
    $parser = new SphinxInventoryParser($stream);
    $header = $parser->parseHeader();
-   $objects = $parser->parseObjects($header, 'https://club1.fr/docs/fr');
+   $objects = $parser->parseObjects($header, 'https://club1.fr/docs/fr/');
    foreach($objects as $object) {
         // do something with $object
    }
