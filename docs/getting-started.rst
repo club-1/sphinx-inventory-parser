@@ -5,6 +5,8 @@ Getting started
    :start-after: .. Introduction
    :end-before: .. Documentation
 
+See :doc:`usage` section for more examples.
+
 
 .. |SphinxInventoryParser::parse()| replace:: :meth:`SphinxInventoryParser::parse()`
 

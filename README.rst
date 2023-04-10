@@ -28,11 +28,13 @@ and can be installed via `composer <https://getcomposer.org/>`_:
 
    composer require club-1/sphinx-inventory-parser
 
+.. _simple-example:
+
 Simple example
 --------------
 
 The main function it provides is |SphinxInventoryParser::parse()|
-that takes a readable resource, typically obtained with |fopen()|_
+that parses a readable resource, typically obtained with |fopen()|_
 and returns a |SphinxInventory| object.
 
 
@@ -44,16 +46,10 @@ and returns a |SphinxInventory| object.
 
    use Club1\SphinxInventoryParser\SphinxInventoryParser;
 
-   $parser = new SphinxInventoryParser();
    $stream = fopen('https://club1.fr/docs/fr/objects.inv', 'r');
-   $inventory = $parser->parse($stream, 'https://club1.fr/docs/fr/');
+   $parser = new SphinxInventoryParser($stream);
+   $inventory = $parser->parse('https://club1.fr/docs/fr/');
    fclose($stream);
-
-See also |tests/SphinxInventoryParserTest.php|_ for more examples.
-
-.. |tests/SphinxInventoryParserTest.php| replace:: ``tests/SphinxInventoryParserTest.php``
-
-.. _tests/SphinxInventoryParserTest.php: https://github.com/club-1/sphinx-inventory-parser/blob/main/tests/SphinxInventoryParserTest.php
 
 
 .. Documentation .. ...........................................................

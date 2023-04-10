@@ -43,3 +43,8 @@ toc_object_entries_show_parents = 'hide'
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+html_baseurl = 'https://club-1.github.io/sphinx-inventory-parser/'
+html_theme_options = {
+    'navigation_with_keys': True,
+    'show_relbar_bottom': True,
+}

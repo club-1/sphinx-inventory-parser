@@ -13,6 +13,7 @@ PHP Sphinx Inventory Parser
    :caption: Contents
 
    getting-started
+   usage
    api
    development
 
