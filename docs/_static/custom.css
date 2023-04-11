@@ -9,3 +9,8 @@ dl.php > dt {
 .highlight .w {
   text-decoration: none;
 }
+
+/* Fix backgound of code in links should not be transparent. */
+a code {
+  background-color: #fbfbfb;
+}
