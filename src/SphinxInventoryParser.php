@@ -124,17 +124,19 @@ class SphinxInventoryParser
 	 */
 	protected function parseHeaderV2(SphinxInventoryHeader $header): SphinxInventoryHeader {
 		$projectStr = $this->ffgets($this->stream);
-		$result = sscanf($projectStr, '# Project: %s', $header->projectName);
+		$result = preg_match('/# Project: (.*)/', $projectStr, $matches);
 		if ($result !== 1) {
 			$str = substr($projectStr, 0, -1);
 			throw new UnexpectedValueException("second line is not a valid Project string: '$str'");
 		}
+		$header->projectName = $matches[1];
 		$versionStr = $this->ffgets($this->stream);
-		$result = sscanf($versionStr, '# Version: %s', $header->projectVersion);
+		$result = preg_match('/# Version: (.*)/', $versionStr, $matches);
 		if ($result !== 1) {
 			$str = substr($versionStr, 0, -1);
 			throw new UnexpectedValueException("third line is not a valid Version string: '$str'");
 		}
+		$header->projectVersion = $matches[1];
 		$zlibStr = $this->ffgets($this->stream);
 		if (strpos($zlibStr, 'zlib') === false) {
 			$str = substr($zlibStr, 0, -1);

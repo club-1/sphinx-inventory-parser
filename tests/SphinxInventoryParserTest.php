@@ -112,6 +112,7 @@ final class SphinxInventoryParserTest extends TestCase
 			$count++;
 		}
 		$this->assertEquals(334, $count);
+		fclose($stream);
 	}
 
 	public function testParseObjectsUnsupportedVersion(): void
@@ -122,6 +123,16 @@ final class SphinxInventoryParserTest extends TestCase
 		$parser = new SphinxInventoryParser($stream);
 		$header = new SphinxInventoryHeader(3);
 		$parser->parseObjects($header);
+		fclose($stream);
+	}
+
+	public function testParseHeaderEmptyProject(): void
+	{
+		$stream = fopen(__DIR__ . "/data/empty_project.header", 'r');
+		$parser = new SphinxInventoryParser($stream);
+		$header = $parser->parseHeader();
+		$this->assertEquals('', $header->projectName);
+		$this->assertEquals('', $header->projectVersion);
 		fclose($stream);
 	}
 }
