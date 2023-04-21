@@ -25,18 +25,36 @@ namespace Club1\SphinxInventoryParser;
 
 /**
  * Metadata of a Sphinx inventory.
+ *
+ * Usually obtained vith :meth:`SphinxInventoryParser::parseHeader()`, but it
+ * can also be created manually if needed.
  */
 class SphinxInventoryHeader
 {
-	/** @var int $version */
+	/**
+	 * ``int`` -- Version of the inventory.
+	 *
+	 * @var int $version
+	 */
 	public $version;
 
-	/** @var string $projectName */
+	/**
+	 * ``string`` -- The inventory's project name.
+	 *
+	 * @var string $projectName
+	 */
 	public $projectName;
 
-	/** @var string $projectVersion */
+	/**
+	 * ``string`` -- The inventory's project version.
+	 *
+	 * @var string $projectVersion
+	 */
 	public $projectVersion;
 
+	/**
+	 * Basic constructor.
+	 */
 	public function __construct(int $version = 2, string $projectName = '', string $projectVersion = '')
 	{
 		$this->version = $version;
