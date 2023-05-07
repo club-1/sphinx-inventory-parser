@@ -2,10 +2,7 @@
 
 use Club1\SphinxInventoryParser\SphinxInventoryHeader;
 use Club1\SphinxInventoryParser\SphinxInventoryParser;
-use Club1\SphinxInventoryParser\SphinxObject;
 use PHPUnit\Framework\TestCase;
-
-require 'vendor/autoload.php';
 
 final class SphinxInventoryParserTest extends TestCase
 {
