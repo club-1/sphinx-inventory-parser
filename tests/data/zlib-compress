@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+// A simple utility to compress the standard I/O with pure zlib.
+
+// Wrap the standard output with a zlib compression filter.
+// The window = 15 parameter allows to use pure zlib compression instead of gzip.
+stream_filter_append(STDOUT, 'zlib.deflate', STREAM_FILTER_WRITE, ['window' => 15]);
+stream_copy_to_stream(STDIN, STDOUT);
+?>
