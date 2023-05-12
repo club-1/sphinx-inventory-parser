@@ -25,6 +25,7 @@ namespace Club1\SphinxInventoryParser;
 
 use Generator;
 use InvalidArgumentException;
+use RuntimeException;
 use UnexpectedValueException;
 
 /**
@@ -35,9 +36,41 @@ use UnexpectedValueException;
  *
  * For more control over the parsing, the underlying methods :meth:`parseHeader()`
  * and :meth:`parseObjects()` can be used directly.
+ *
+ * @phpstan-consistent-constructor
  */
 class SphinxInventoryParser
 {
+	/**
+	 * Parse a Sphinx inventory directly from an online documentation's URL.
+	 *
+	 * This is the simplest way to use this library. Example::
+	 *
+	 *    $inventory = SphinxInventoryParser::parseFromDoc('https://club1.fr/docs/');
+	 *
+	 * @param  string	$url		The URL of the documentation's root, with or without
+	 * 					the trailing slash.
+	 * @param  string	$path		The path to the inventory within the documentation.
+	 * @return SphinxInventory		The parsed inventory.
+	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
+	 * @throws RuntimeException		If the stream can not be open.
+	 */
+	public static function parseFromDoc(string $url, string $path = 'objects.inv'): SphinxInventory {
+		if ($url[-1] != '/') {
+			$url .= '/';
+		}
+		$stream = @fopen($url . $path, 'r');
+		if ($stream === false) {
+			$error = error_get_last();
+			$message = $error ? $error['message'] : 'unknown error';
+			throw new RuntimeException("could not open file: $message");
+		}
+		$parser = new static($stream);
+		$inventory = $parser->parse($url);
+		fclose($stream);
+		return $inventory;
+	}
+
 	/**
 	 * @var resource $stream
 	 * @ignore

@@ -198,4 +198,17 @@ final class SphinxInventoryParserTest extends TestCase
 		$this->assertEquals('', $header->projectVersion);
 		fclose($stream);
 	}
+
+	public function testParseFromDocException(): void
+	{
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessageMatches('#^could not open file: fopen\(data/objects.inv\): #');
+		$inventory = SphinxInventoryParser::parseFromDoc('data');
+	}
+
+	public function testParseFromDocValid(): void
+	{
+		$inventory = SphinxInventoryParser::parseFromDoc(__DIR__ . '/data/', 'no_objects.inv');
+		$this->assertCount(0, $inventory->objects);
+	}
 }
