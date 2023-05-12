@@ -70,7 +70,7 @@ Development requirements
 
 -  **make**: to manage build scripts
 -  **composer**: to install PHP development dependencies
--  **pigz**: to build tests data
+-  **pigz**: (Optional) to build tests data, will fallback to a PHP script if not present
 
 On Debian and derivatives:
 

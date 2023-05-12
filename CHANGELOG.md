@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Added
+
+- Run tests in Windows and MacOS in GitHub actions.
+
 ## [v1.0.0] - 2023-05-07
 
 First stable release.
