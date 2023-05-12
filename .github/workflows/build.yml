@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -30,12 +30,23 @@ jobs:
       - name: Build
         run: make
 
-      - name: Run check
+      - name: Run test
         env:
           PHPUNITFLAGS: --coverage-clover=cov.xml
-        run: make check --keep-going
+        run: make test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           files: cov.xml
+
+  analyse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install PHP dependencies
+        run: make vendor
+
+      - name: Run analyse
+        run: make analyse
