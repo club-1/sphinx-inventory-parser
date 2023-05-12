@@ -1,4 +1,4 @@
-files = valid.inv skipped_lines.inv skipped_lines_lf.inv skipped_lines_crlf.inv invalid_object.inv no_objects.inv name_whitespace.inv role_colon.inv
+files = valid.inv skipped_lines.inv skipped_lines_lf.inv skipped_lines_crlf.inv no_objects.inv name_whitespace.inv
 
 ifeq (, $(shell which pigz 2> /dev/null))
 	ZLIB_COMPRESS = ./zlib-compress

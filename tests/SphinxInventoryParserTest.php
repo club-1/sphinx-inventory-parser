@@ -2,10 +2,67 @@
 
 use Club1\SphinxInventoryParser\SphinxInventoryHeader;
 use Club1\SphinxInventoryParser\SphinxInventoryParser;
+use Club1\SphinxInventoryParser\SphinxObject;
 use PHPUnit\Framework\TestCase;
 
 final class SphinxInventoryParserTest extends TestCase
 {
+	/**
+	 * @dataProvider validObjectsV2Provider
+	 */
+	public function testValidObjectsV2(string $objectLine, array $objectArray): void
+	{
+		$object = new SphinxObject(...$objectArray);
+		$stream = fopen('php://memory','r+');
+		fwrite($stream, $objectLine);
+		rewind($stream);
+		$parser = new SphinxInventoryParser($stream);
+		$header = new SphinxInventoryHeader(2);
+		foreach ($parser->parseObjects($header) as $o) {
+			$this->assertEquals($object, $o);
+		}
+		fclose($stream);
+	}
+
+	public function validObjectsV2Provider(): array
+	{
+		return [
+			'basic' => [
+				'API std:term -1 doc.html#term-$ -',
+				['API', 'std', 'term', -1, 'doc.html#term-API', 'API']
+			],
+			'colon in role' => [
+				'name domain:role:colon 1 doc.html#role-colon-$ -',
+				['name', 'domain', 'role:colon', 1, 'doc.html#role-colon-name', 'name']
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider invalidObjectsV2Provider
+	 */
+	public function testInvalidObjectsV2(string $objectLine): void
+	{
+		$stream = fopen('php://memory','r+');
+		fwrite($stream, $objectLine);
+		rewind($stream);
+		$parser = new SphinxInventoryParser($stream);
+		$header = new SphinxInventoryHeader(2);
+		$this->expectException(UnexpectedValueException::class);
+		$this->expectExceptionMessage("object string did not match pattern: '$objectLine'");
+		foreach ($parser->parseObjects($header) as $o) {
+			// do nothing
+		}
+		fclose($stream);
+	}
+
+	public function invalidObjectsV2Provider(): array
+	{
+		return [
+			['invalid sphinx object line'],
+		];
+	}
+
 	public function testParseValid(): void
 	{
 		$stream = fopen(__DIR__ . '/data/valid.inv', 'r');
@@ -80,17 +137,6 @@ final class SphinxInventoryParserTest extends TestCase
 		$this->assertEquals('flux Web', $inventory->objects[0]->name);
 	}
 
-	public function testParseRoleColon(): void
-	{
-		$stream = fopen(__DIR__ . '/data/role_colon.inv', 'r');
-		$parser = new SphinxInventoryParser($stream);
-		$inventory = $parser->parse();
-		fclose($stream);
-		$this->assertCount(1, $inventory->objects);
-		$this->assertEquals('domain', $inventory->objects[0]->domain);
-		$this->assertEquals('role:colon', $inventory->objects[0]->role);
-	}
-
 	/**
 	 * @dataProvider parseExceptionsProvider
 	 */
@@ -116,7 +162,6 @@ final class SphinxInventoryParserTest extends TestCase
 			["invalid_project.inv", "second line is not a valid Project string: '# Invalid Project: CLUB1'"],
 			["invalid_version.inv", "third line is not a valid Version string: '# Invalid Version: 42'"],
 			["no_zlib.inv", "fourth line does advertise zlib compression: '# The remainder of this file is not compressed.'"],
-			["invalid_object.inv", "object string did not match pattern: 'invalid sphinx inventory object line'"],
 		];
 	}
 

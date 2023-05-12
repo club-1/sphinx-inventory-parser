@@ -1,8 +1,6 @@
 *.zz
-invalid_object.inv
 name_whitespace.inv
 no_objects.inv
-role_colon.inv
 skipped_lines.inv
 skipped_lines_lf.inv
 skipped_lines_crlf.inv
