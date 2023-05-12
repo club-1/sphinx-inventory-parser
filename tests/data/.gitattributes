@@ -1,1 +1,3 @@
+*_crlf.*	text eol=crlf
+*_lf.*		text eol=lf
 *.inv		binary

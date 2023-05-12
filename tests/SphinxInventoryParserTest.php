@@ -40,13 +40,34 @@ final class SphinxInventoryParserTest extends TestCase
 		$this->assertCount(0, $inventory->objects);
 	}
 
-	public function testParseSkippedLines(): void
+	/**
+	 * @dataProvider skippedLinesProvider
+	 */
+	public function testParseSkippedLines(string $file): void
 	{
-		$stream = fopen(__DIR__ . '/data/skipped_lines.inv', 'r');
+		$stream = fopen(__DIR__ . '/data/' . $file, 'r');
 		$parser = new SphinxInventoryParser($stream);
 		$inventory = $parser->parse();
 		fclose($stream);
+		$this->assertEquals('CLUB1', $inventory->project);
+		$this->assertEquals('main', $inventory->version);
 		$this->assertCount(1, $inventory->objects);
+		$first = $inventory->objects[0];
+		$this->assertEquals('valid', $first->name);
+		$this->assertEquals('std', $first->domain);
+		$this->assertEquals('object', $first->role);
+		$this->assertEquals(1, $first->priority);
+		$this->assertEquals('line', $first->uri);
+		$this->assertEquals('valid', $first->displayName);
+	}
+
+	public function skippedLinesProvider(): array
+	{
+		return [
+			['skipped_lines.inv'],
+			['skipped_lines_lf.inv'],
+			['skipped_lines_crlf.inv'],
+		];
 	}
 
 	public function testParseNameWhitespace(): void
