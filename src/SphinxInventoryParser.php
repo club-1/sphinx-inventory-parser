@@ -108,7 +108,7 @@ class SphinxInventoryParser
 		$versionStr = $this->ffgets($this->stream, 32);
 		$result = sscanf($versionStr, '# Sphinx inventory version %d', $header->version);
 		if ($result !== 1) {
-			$str = substr($versionStr, 0, -1);
+			$str = rtrim($versionStr, "\n\r");
 			throw new UnexpectedValueException("first line is not a valid Sphinx inventory version string: '$str'");
 		}
 		switch($header->version) {
@@ -124,22 +124,22 @@ class SphinxInventoryParser
 	 */
 	protected function parseHeaderV2(SphinxInventoryHeader $header): SphinxInventoryHeader {
 		$projectStr = $this->ffgets($this->stream);
-		$result = preg_match('/# Project: (.*)/', $projectStr, $matches);
+		$result = preg_match('/(*ANYCRLF)# Project: (.*)/', $projectStr, $matches);
 		if ($result !== 1) {
-			$str = substr($projectStr, 0, -1);
+			$str = rtrim($projectStr, "\n\r");
 			throw new UnexpectedValueException("second line is not a valid Project string: '$str'");
 		}
 		$header->projectName = $matches[1];
 		$versionStr = $this->ffgets($this->stream);
-		$result = preg_match('/# Version: (.*)/', $versionStr, $matches);
+		$result = preg_match('/(*ANYCRLF)# Version: (.*)/', $versionStr, $matches);
 		if ($result !== 1) {
-			$str = substr($versionStr, 0, -1);
+			$str = rtrim($versionStr, "\n\r");
 			throw new UnexpectedValueException("third line is not a valid Version string: '$str'");
 		}
 		$header->projectVersion = $matches[1];
 		$zlibStr = $this->ffgets($this->stream);
 		if (strpos($zlibStr, 'zlib') === false) {
-			$str = substr($zlibStr, 0, -1);
+			$str = rtrim($zlibStr, "\n\r");
 			throw new UnexpectedValueException("fourth line does advertise zlib compression: '$str'");
 		}
 		// We need to set window to 15 because PHP's zlib.inflate filter
@@ -181,12 +181,12 @@ class SphinxInventoryParser
 	 */
 	protected function parseObjectsV2(string $baseURI): Generator {
 		while(($objectStr = fgets($this->stream)) !== false) {
-			if (strlen($objectStr) == 1 || $objectStr[0] == '#') {
+			if (trim($objectStr) == '' || $objectStr[0] == '#') {
 				continue;
 			}
-			$result = preg_match('/(?x)(.+?)\s+([^\s:]+):(\S+)\s+(-?\d+)\s+?(\S*)\s+(.*)/', $objectStr, $matches);
+			$result = preg_match('/(*ANYCRLF)(?x)(.+?)\s+([^\s:]+):(\S+)\s+(-?\d+)\s+?(\S*)\s+(.*)/', $objectStr, $matches);
 			if ($result !== 1) {
-				$str = substr($objectStr, 0, -1);
+				$str = rtrim($objectStr, "\n\r");
 				throw new UnexpectedValueException("object string did not match pattern: '$str'");
 			}
 			array_shift($matches);

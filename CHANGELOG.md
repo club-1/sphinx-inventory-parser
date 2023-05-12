@@ -4,7 +4,8 @@
 
 ### Added
 
-- Run tests in Windows and MacOS in GitHub actions.
+- Run tests on Windows and MacOS in GitHub actions.
+- Support Windows style line endings (`\r\n`).
 
 ## [v1.0.0] - 2023-05-07
 
