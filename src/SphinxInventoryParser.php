@@ -47,7 +47,7 @@ class SphinxInventoryParser
 	 * Parse a Sphinx inventory directly from an online documentation's URL.
 	 *
 	 * This is the simplest way to use this library. Its parameters are
-	 * similar to Sphinx's :any:`intersphinx_mapping` configuration value.
+	 * similar to Sphinx's :confval:`intersphinx_mapping` configuration value.
 	 * Example::
 	 *
 	 *    $inventory = SphinxInventoryParser::parseFromDoc('https://club1.fr/docs/');
