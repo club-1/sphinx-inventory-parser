@@ -44,13 +44,18 @@ class SphinxInventoryParser
 	/**
 	 * Parse a Sphinx inventory directly from an online documentation's URL.
 	 *
-	 * This is the simplest way to use this library. Example::
+	 * This is the simplest way to use this library. Its parameters are
+	 * similar to Sphinx's :ref`intersphinx_mapping` configuration value.
+	 * Example::
 	 *
 	 *    $inventory = SphinxInventoryParser::parseFromDoc('https://club1.fr/docs/');
 	 *
 	 * @param  string	$url		The URL of the documentation's root, with or without
-	 * 					the trailing slash.
+	 * 					the trailing slash. It is used both as the location
+	 * 					to fetch the inventory and as the base for the
+	 * 					:attr:`SphinxObject::$uri`.
 	 * @param  string	$path		The path to the inventory within the documentation.
+	 * 					Defaults to ``objects.inv``.
 	 * @return SphinxInventory		The parsed inventory.
 	 * @throws UnexpectedValueException	If an unexpected value is encountered while parsing.
 	 * @throws RuntimeException		If the stream can not be open.

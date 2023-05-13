@@ -33,23 +33,15 @@ and can be installed via `composer <https://getcomposer.org/>`_:
 Simple example
 --------------
 
-The simplest way to use it is with |SphinxInventoryParser::parse()|
-that parses a readable resource, typically obtained with |fopen()|_
-and returns a |SphinxInventory| object.
-
-
-.. |fopen()| replace:: ``fopen()``
-
-.. _fopen(): https://www.php.net/manual/en/function.fopen.php
+The simplest way to use it is with |SphinxInventoryParser::parseFromDoc()|
+that creates a |SphinxInventory| object directly from an online documentation,
+based on its URL (and an optional inventory path).
 
 .. code:: php
 
    use Club1\SphinxInventoryParser\SphinxInventoryParser;
 
-   $stream = fopen('https://club1.fr/docs/fr/objects.inv', 'r');
-   $parser = new SphinxInventoryParser($stream);
-   $inventory = $parser->parse('https://club1.fr/docs/fr/');
-   fclose($stream);
+   $inventory = SphinxInventoryParser::parseFromDoc('https://club1.fr/docs/fr/');
 
 
 .. Documentation .. ...........................................................
@@ -89,8 +81,7 @@ Build scripts
 
 .. Epilog .. ..................................................................
 
-.. |SphinxInventoryParser::parse()| replace:: ``SphinxInventoryParser::parse()``
-
+.. |SphinxInventoryParser::parseFromDoc()| replace:: ``SphinxInventoryParser::parseFromDoc()``
 .. |SphinxInventory| replace:: ``SphinxInventory``
 
 .. |License LGPL-2.1-or-later| image:: https://img.shields.io/badge/license-LGPL--2.1--or--later-blue

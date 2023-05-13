@@ -8,8 +8,27 @@ so there are multiple ways to use it.
    :start-after: .. Example
    :end-before: .. Documentation
 
-.. |SphinxInventoryParser::parse()| replace:: :meth:`SphinxInventoryParser::parse()`
+.. |SphinxInventoryParser::parseFromDoc()| replace:: :meth:`SphinxInventoryParser::parseFromDoc()`
 .. |SphinxInventory| replace:: :class:`SphinxInventory`
+
+Using an existing stream
+------------------------
+
+Another way is to use :meth:`SphinxInventoryParser::parse()`
+that parses a readable resource, typically obtained with |fopen()|_
+and returns a :class:`SphinxInventory` object.
+
+.. |fopen()| replace:: ``fopen()``
+.. _fopen(): https://www.php.net/manual/en/function.fopen.php
+
+.. code:: php
+
+   use Club1\SphinxInventoryParser\SphinxInventoryParser;
+
+   $stream = fopen('file:///tmp/objects.inv', 'r');
+   $parser = new SphinxInventoryParser($stream);
+   $inventory = $parser->parse('https://club1.fr/docs/fr/');
+   fclose($stream);
 
 Parse objects one by one
 ------------------------
