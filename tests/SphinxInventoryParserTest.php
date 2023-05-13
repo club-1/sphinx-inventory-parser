@@ -31,6 +31,14 @@ final class SphinxInventoryParserTest extends TestCase
 				'API std:term -1 doc.html#term-$ -',
 				['API', 'std', 'term', -1, 'doc.html#term-API', 'API']
 			],
+			'display name' => [
+				'test any:ref 2 location Display Name',
+				['test', 'any', 'ref', 2, 'location', 'Display Name']
+			],
+			'whitespace in name' => [
+				'white space std:label 1 white-space -',
+				['white space', 'std', 'label', 1, 'white-space', 'white space']
+			],
 			'colon in role' => [
 				'name domain:role:colon 1 doc.html#role-colon-$ -',
 				['name', 'domain', 'role:colon', 1, 'doc.html#role-colon-name', 'name']
@@ -51,7 +59,7 @@ final class SphinxInventoryParserTest extends TestCase
 		$this->expectException(UnexpectedValueException::class);
 		$this->expectExceptionMessage("object string did not match pattern: '$objectLine'");
 		foreach ($parser->parseObjects($header) as $o) {
-			// do nothing
+			trigger_error(print_r($o, true), E_USER_NOTICE);
 		}
 		fclose($stream);
 	}
@@ -59,7 +67,16 @@ final class SphinxInventoryParserTest extends TestCase
 	public function invalidObjectsV2Provider(): array
 	{
 		return [
-			['invalid sphinx object line'],
+			'empty name' => [' domain:role 1 location dispname'],
+			'empty domain' => ['name :role 1 location dispname'],
+			# 'whitespace in domain' => ['name dom ain:role 1 location dispname'], // matched as 'ain' domain
+			'empty role' => ['name domain: 1 location dispname'],
+			'whitespace in role' => ['name domain:ro le 1 location dispname'],
+			'empty priority' => ['name domain:role  location dispname'],
+			'non number priority' => ['name domain:role priority location dispname'],
+			'decimal priority' => ['name domain:role 1.23 location dispname'],
+			# 'whitespace in location' => ['name domain:role 1 loca tion dispname'], // matched as 'loca' location
+			'missing dispname' => ['name domain:role 1 location'],
 		];
 	}
 
