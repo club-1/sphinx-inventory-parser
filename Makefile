@@ -14,7 +14,7 @@ vendor: composer.json
 
 docs/api/%.rst: src/%.php vendor
 	vendor/bin/doxphp < $< | vendor/bin/doxphp2sphinx \
-	| grep -vE '(php:namespace::|:var:)' \
+	| grep -vE '(php:namespace::|:var:|phpstan-consistent-constructor)' \
 	> $@
 
 docs: $(patsubst src/%.php,docs/api/%.rst,$(SRC))
