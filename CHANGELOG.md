@@ -6,6 +6,10 @@
 
 - Run tests on Windows and MacOS in GitHub actions.
 - Support Windows style line endings (`\r\n`).
+- Add [`SphinxInventoryParser::parseFromDoc()`][parseFromDoc] static method as
+  an even simpler way to use the parser for the most frequent use case.
+
+[parseFromDoc]: https://club-1.github.io/sphinx-inventory-parser/api.html#SphinxInventoryParser::parseFromDoc
 
 ## [v1.0.0] - 2023-05-07
 
