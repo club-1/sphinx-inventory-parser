@@ -2,6 +2,8 @@
 
 ## [unreleased]
 
+## [v1.1.0] - 2023-05-14
+
 ### Added
 
 - Run tests on Windows and MacOS in GitHub actions.
@@ -15,6 +17,7 @@
 
 First stable release.
 
-[unreleased]: https://github.com/club-1/sphinx-inventory-parser/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/club-1/sphinx-inventory-parser/compare/v1.1.0...HEAD
+[v1.1.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.1.0
 [v1.0.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.0.0
 
