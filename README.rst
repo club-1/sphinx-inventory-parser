@@ -81,8 +81,12 @@ Build scripts
 
 .. Epilog .. ..................................................................
 
-.. |SphinxInventoryParser::parseFromDoc()| replace:: ``SphinxInventoryParser::parseFromDoc()``
-.. |SphinxInventory| replace:: ``SphinxInventory``
+.. |SphinxInventoryParser::parseFromDoc()| replace:: |text:SphinxInventoryParser::parseFromDoc()|_
+.. |text:SphinxInventoryParser::parseFromDoc()| replace:: ``SphinxInventoryParser::parseFromDoc()``
+.. _text:SphinxInventoryParser::parseFromDoc(): https://club-1.github.io/sphinx-inventory-parser/api.html#SphinxInventoryParser::parseFromDoc
+.. |SphinxInventory| replace:: |text:SphinxInventory|_
+.. |text:SphinxInventory| replace:: ``SphinxInventory``
+.. _text:SphinxInventory: https://club-1.github.io/sphinx-inventory-parser/api.html#SphinxInventory
 
 .. |License LGPL-2.1-or-later| image:: https://img.shields.io/badge/license-LGPL--2.1--or--later-blue
    :target: LICENSE
