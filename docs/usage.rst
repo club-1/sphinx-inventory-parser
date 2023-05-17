@@ -14,9 +14,10 @@ so there are multiple ways to use it.
 Using an existing stream
 ------------------------
 
-Another way is to use :meth:`SphinxInventoryParser::parse()`
-that parses a readable resource, typically obtained with |fopen()|_
-and returns a :class:`SphinxInventory` object.
+Another way is to create a new :class:`SphinxInventoryParser` object
+with a readable resource, typically obtained with |fopen()|_ with ``r`` mode,
+then call its :meth:`~SphinxInventoryParser::parse()` method
+that will return a :class:`SphinxInventory` object.
 
 .. |fopen()| replace:: ``fopen()``
 .. _fopen(): https://www.php.net/manual/en/function.fopen.php

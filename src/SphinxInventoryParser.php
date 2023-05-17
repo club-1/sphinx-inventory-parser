@@ -83,7 +83,7 @@ class SphinxInventoryParser
 	/**
 	 * Create a :class:`SphinxInventoryParser` for the given stream.
 	 *
-	 * Such a stream is usually obtained with |fopen|_, using the ``r`` mode.
+	 * Such a stream is usually obtained with |fopen()|_, using the ``r`` mode.
 	 * For example, with a remote file over HTTPS it is possible to do this::
 	 *
 	 *    $stream = fopen('https://club1.fr/docs/fr/objects.inv', 'r');
@@ -91,8 +91,8 @@ class SphinxInventoryParser
 	 *    $inventory = $parser->parse('https://club1.fr/docs/fr/');
 	 *    fclose($stream);
 	 *
-	 * .. |fopen| replace:: ``fopen``
-	 * .. _fopen: https://www.php.net/manual/en/function.fopen.php
+	 * .. |fopen()| replace:: ``fopen()``
+	 * .. _fopen(): https://www.php.net/manual/en/function.fopen.php
 	 *
 	 * @param resource	$stream		The resource to parse, opened in read mode.
 	 */
