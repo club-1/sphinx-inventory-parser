@@ -46,6 +46,11 @@ based on its URL (and an optional inventory path).
 
 .. Documentation .. ...........................................................
 
+For more examples on how to use this library, see `the "Usage" section`_
+of the documentation.
+
+.. _the "Usage" section: https://club-1.github.io/sphinx-inventory-parser/usage.html
+
 Documentation
 -------------
 
