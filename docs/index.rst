@@ -15,6 +15,7 @@ PHP Sphinx Inventory Parser
    getting-started
    usage
    api
+   changes
    development
 
 .. toctree::

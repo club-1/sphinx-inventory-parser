@@ -20,6 +20,7 @@ release = 'v1.1.0'
 extensions = [
     'sphinxcontrib.phpdomain',
     'sphinx.ext.intersphinx',
+    'myst_parser',
 ]
 
 intersphinx_mapping = {

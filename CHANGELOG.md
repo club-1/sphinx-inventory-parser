@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Added
+
+- Include the Changelog in the documentation.
+
 ## [v1.1.0] - 2023-05-14
 
 ### Added
