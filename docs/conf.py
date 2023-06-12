@@ -46,6 +46,7 @@ html_theme = 'alabaster'
 html_static_path = ['_static']
 html_baseurl = 'https://club-1.github.io/sphinx-inventory-parser/'
 html_theme_options = {
+    'description': "Parse Sphinx documentation's object.inv inventory file format into an indexed SphinxInventory object.",
     'navigation_with_keys': True,
     'show_relbar_bottom': True,
 }
