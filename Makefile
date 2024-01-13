@@ -42,7 +42,8 @@ releasepatch releaseminor releasemajor: release%: .confirm check all
 	git tag $(TAG)
 	git push --tags
 
-check: analyse test;
+check: analyse test
+	composer validate
 
 analyse: vendor
 	vendor/bin/phpstan analyse src --level 9 $(PHPSTANFLAGS)
