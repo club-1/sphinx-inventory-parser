@@ -227,7 +227,7 @@ class SphinxInventoryParser
 			}
 			array_shift($matches);
 			list($name, $domain, $role, $priority, $location, $displayName) = $matches;
-			if ($location[-1] == '$') {
+			if (strlen($location) > 0 && $location[-1] == '$') {
 				$location = substr($location, 0, -1) . $name;
 			}
 			$uri  = $baseURI . $location;
