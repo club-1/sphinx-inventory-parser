@@ -2,6 +2,8 @@
 
 ## [unreleased]
 
+## [v1.1.1] - 2024-01-13
+
 ### Fixed
 
 - Fix a crash with zero length location in an object line ([#7]).
@@ -27,7 +29,8 @@
 
 First stable release.
 
-[unreleased]: https://github.com/club-1/sphinx-inventory-parser/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/club-1/sphinx-inventory-parser/compare/v1.1.1...HEAD
+[v1.1.1]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.1.1
 [v1.1.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.1.0
 [v1.0.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.0.0
 
