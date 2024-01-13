@@ -96,7 +96,7 @@ Build scripts
 
 .. |License LGPL-2.1-or-later| image:: https://img.shields.io/badge/license-LGPL--2.1--or--later-blue
    :target: LICENSE
-.. |PHP versions tested| image:: https://img.shields.io/badge/php-7.3%20%7C%207.4%20%7C%208.0%20%7C%208.1%20%7C%208.2%20%7C%208.3-blue
+.. |PHP versions tested| image:: https://img.shields.io/badge/php-7.4%20%7C%208.0%20%7C%208.1%20%7C%208.2%20%7C%208.3-blue
 .. |build status| image:: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/build.yml
    :target: https://github.com/club-1/sphinx-inventory-parser/actions/workflows/build.yml?query=branch%3Amain
 .. |coverage report| image:: https://img.shields.io/codecov/c/gh/club-1/sphinx-inventory-parser
