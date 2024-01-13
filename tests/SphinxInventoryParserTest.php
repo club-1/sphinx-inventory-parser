@@ -43,6 +43,10 @@ final class SphinxInventoryParserTest extends TestCase
 				'name domain:role:colon 1 doc.html#role-colon-$ -',
 				['name', 'domain', 'role:colon', 1, 'doc.html#role-colon-name', 'name']
 			],
+			'zero lenth location' => [
+				'name domain:role 1  dispname',
+				['name', 'domain', 'role', 1, '', 'dispname']
+			],
 		];
 	}
 
