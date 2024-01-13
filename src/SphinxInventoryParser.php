@@ -3,7 +3,7 @@
 /*
  * This file is part of club-1/sphinx-inventory-parser.
  *
- * Copyright (C) 2023 Nicolas Peugnet <nicolas@club1.fr>
+ * Copyright (C) 2023, 2024 Nicolas Peugnet <nicolas@club1.fr>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
