@@ -2,9 +2,15 @@
 
 ## [unreleased]
 
+### Fixed
+
+- Fix a crash with zero length location in an object line ([#7]).
+
 ### Added
 
 - Include the Changelog in the documentation.
+
+[#7]: https://github.com/club-1/sphinx-inventory-parser/pull/7
 
 ## [v1.1.0] - 2023-05-14
 
