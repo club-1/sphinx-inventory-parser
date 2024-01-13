@@ -82,6 +82,7 @@ Build scripts
 
    make        # Fetch development dependencies and build tests data.
    make check  # Run tests.
+   make fuzz   # Run fuzzer.
    make clean  # Clean all downloaded and generated files.
 
 .. Epilog .. ..................................................................
