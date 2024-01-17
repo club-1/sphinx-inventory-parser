@@ -14,7 +14,7 @@ $(TESTS): %: %/corpus
 %/corpus:
 	mkdir $@
 
-clean: $(TESTS)
+clean:
 	rm -rf $(TESTS:%=%/corpus)
 	rm -f crash-*.txt
 	rm -f minimized-*.txt
