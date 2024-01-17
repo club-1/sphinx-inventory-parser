@@ -15,7 +15,7 @@ by describing the `Sphinx objects.inv v2 Syntax <https://sphobjinv.readthedocs.i
 Requirements
 ------------
 
-The only requirement is PHP >= 7.3 with `Zlib extension <https://www.php.net/manual/en/book.zlib.php>`_
+The only requirement is PHP >= 7.4 with `Zlib extension <https://www.php.net/manual/en/book.zlib.php>`_
 (usually included).
 
 Installation
