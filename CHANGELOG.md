@@ -2,6 +2,18 @@
 
 ## [unreleased]
 
+### Added
+
+- Add a fuzzer setup based on [nikic/PHP-Fuzzer] with a target for
+  `parseObjectsV2()` and a corpus seeded from the unit test's data ([#6]).
+
+### Removed
+
+- Drop support for PHP 7.3 ([#6]).
+
+[nikic/PHP-Fuzzer]: https://github.com/nikic/PHP-Fuzzer
+[#6]: https://github.com/club-1/sphinx-inventory-parser/pull/6
+
 ## [v1.1.1] - 2024-01-13
 
 ### Fixed

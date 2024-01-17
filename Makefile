@@ -23,6 +23,9 @@ docs: $(patsubst src/%.php,docs/api/%.rst,$(SRC))
 tests/data:
 	$(MAKE) -C $@ $(filter all clean,$(MAKECMDGOALS))
 
+tests/fuzz:
+	$(MAKE) -C $@ $(filter clean,$(MAKECMDGOALS))
+
 # Create a new release
 bump = echo '$2' | awk 'BEGIN{FS=OFS="."} {$$$1+=1; for (i=$1+1; i<=3; i++) $$i=0} 1'
 releasepatch: V := 3
@@ -51,7 +54,10 @@ analyse: vendor
 test: vendor tests/data
 	XDEBUG_MODE=coverage vendor/bin/phpunit tests --coverage-filter='src' $(PHPUNITFLAGS)
 
-clean: tests/data
+fuzz: vendor
+	$(MAKE) -C tests/fuzz
+
+clean: tests/data tests/fuzz
 	rm -rf vendor
 	rm -rf docs/api/*.rst
 	rm -rf docs/_build
@@ -59,4 +65,4 @@ clean: tests/data
 .confirm:
 	@echo -n "$(CONFIRM_MSG)? [y/N] " && read ans && [ $${ans:-N} = y ]
 
-.PHONY: all docs tests/data releasepatch releaseminor releasemajor check analyse test clean .confirm
+.PHONY: all docs tests/data tests/fuzz releasepatch releaseminor releasemajor check analyse test fuzz clean .confirm

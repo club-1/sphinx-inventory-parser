@@ -19,11 +19,12 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "ext-zlib": "*"
     },
     "require-dev": {
         "doxphp/doxphp": "dev-master",
+        "nikic/php-fuzzer": "^0.0.10",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9"
     },
