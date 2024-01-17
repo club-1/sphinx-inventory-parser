@@ -1,15 +1,22 @@
 FUZZER ?= ../../vendor/bin/php-fuzzer
 RUNS   ?= 1000000
-TARGETS = $(wildcard *.php)
-TESTS   = $(TARGETS:.php=)
+TESTS   = parseObjectsV2
+RUNTESTS= $(TESTS:%=run-%)
 
-all: $(TESTS)
+all: $(RUNTESTS)
 
-$(TESTS):
-	$(FUZZER) fuzz --max-runs $(RUNS) $@.php corpus/$@
+$(RUNTESTS): run-%: %
+	$(FUZZER) fuzz --max-runs $(RUNS) $*/target.php $*/corpus
 
-clean:
-	rm crash-*.txt
-	rm minimized-*.txt
+$(TESTS): %: %/corpus
+	$(MAKE) -C $@
 
-.PHONY: all $(TESTS) clean
+%/corpus:
+	mkdir $@
+
+clean: $(TESTS)
+	rm -rf $(TESTS:%=%/corpus)
+	rm -f crash-*.txt
+	rm -f minimized-*.txt
+
+.PHONY: all $(RUNTESTS) $(TESTS) clean
