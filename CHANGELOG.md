@@ -4,8 +4,9 @@
 
 ### Added
 
-- Add a fuzzer setup based on [nikic/PHP-Fuzzer] with a target for
-  `parseObjectsV2()` and a corpus seeded from the unit test's data ([#6]).
+- Add a fuzzer setup based on [nikic/PHP-Fuzzer] with targets for `parseHeader()`
+  and `parseObjectsV2()` and a corpus seeded from the unit test's data ([#6],
+  [#8]).
 
 ### Changed
 
@@ -26,6 +27,7 @@
 
 [nikic/PHP-Fuzzer]: https://github.com/nikic/PHP-Fuzzer
 [#6]: https://github.com/club-1/sphinx-inventory-parser/pull/6
+[#8]: https://github.com/club-1/sphinx-inventory-parser/issues/8
 [#10]: https://github.com/club-1/sphinx-inventory-parser/pull/10
 [#11]: https://github.com/club-1/sphinx-inventory-parser/pull/11
 

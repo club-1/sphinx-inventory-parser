@@ -1,6 +1,6 @@
 FUZZER ?= ../../vendor/bin/php-fuzzer
 RUNS   ?= 1000000
-TESTS   = parseObjectsV2
+TESTS   = parseHeader parseObjectsV2
 RUNTESTS= $(TESTS:%=run-%)
 
 all: $(RUNTESTS)
