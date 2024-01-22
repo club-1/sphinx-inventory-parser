@@ -234,7 +234,7 @@ final class SphinxInventoryParserTest extends TestCase
 	public function testParseObjectsStreamError(): void
 	{
 		$this->expectException(UnexpectedValueException::class);
-		$this->expectExceptionMessage("could not read until end of stream");
+		$this->expectExceptionMessage("could not read until end of stream: fgets():");
 		$stream = fopen(__DIR__ . "/data/valid.data", 'a');
 		$parser = new SphinxInventoryParser($stream);
 		$header = new SphinxInventoryHeader(2);

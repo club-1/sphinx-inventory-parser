@@ -237,7 +237,7 @@ class SphinxInventoryParser
 			yield new SphinxObject($name, $domain, $role, intval($priority), $uri, $displayName);
 		}
 		if (!feof($this->stream)) {
-			throw new UnexpectedValueException('could not read until end of stream');
+			throw new UnexpectedValueException('could not read until end of stream: ' . error_msg());
 		}
 	}
 }
@@ -258,4 +258,17 @@ function ffgets($stream, ?int $length = null): string
 		throw new UnexpectedValueException('unexpected end of file');
 	}
 	return $line;
+}
+
+/**
+ * Extract the last error message and clear it.
+ *
+ * @ignore
+ */
+function error_msg(): string
+{
+	$err = error_get_last();
+	error_clear_last();
+	assert(!is_null($err), "Expected an error to be reported");
+	return $err['message'];
 }
