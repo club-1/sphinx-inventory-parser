@@ -253,6 +253,16 @@ final class SphinxInventoryParserTest extends TestCase
 		fclose($stream);
 	}
 
+	public function testParseHeaderStreamError(): void
+	{
+		$this->expectException(UnexpectedValueException::class);
+		$this->expectExceptionMessage("could not read line: fgets():");
+		$stream = fopen(__DIR__ . "/data/valid.header", 'a');
+		$parser = new SphinxInventoryParser($stream);
+		$parser->parseHeader();
+		fclose($stream);
+	}
+
 	public function testParseFromDocException(): void
 	{
 		$this->expectException(RuntimeException::class);

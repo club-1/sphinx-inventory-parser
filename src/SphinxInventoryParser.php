@@ -253,8 +253,11 @@ class SphinxInventoryParser
  */
 function ffgets($stream, ?int $length = null): string
 {
-	$line = is_null($length) ? fgets($stream) : fgets($stream, $length);
+	$line = is_null($length) ? @fgets($stream) : @fgets($stream, $length);
 	if ($line === false) {
+		if (!feof($stream)) {
+			throw new UnexpectedValueException('could not read line: ' . error_msg());
+		}
 		throw new UnexpectedValueException('unexpected end of file');
 	}
 	return $line;

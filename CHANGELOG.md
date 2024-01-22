@@ -9,8 +9,8 @@
 
 ### Changed
 
-- Stream reading errors are silenced in parseObjects, an exception that contains
-  the error message is still thrown.
+- Stream reading errors in `parseObjects()` and `parseHeader()` are silenced,
+  an exception is still thrown but it now contains the error message.
 
 ### Removed
 
