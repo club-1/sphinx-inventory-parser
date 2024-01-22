@@ -216,7 +216,7 @@ class SphinxInventoryParser
 	 * @ignore
 	 */
 	protected function parseObjectsV2(string $baseURI): Generator {
-		while(($objectStr = fgets($this->stream)) !== false) {
+		while(($objectStr = @fgets($this->stream)) !== false) {
 			if (trim($objectStr) == '' || $objectStr[0] == '#') {
 				continue;
 			}
@@ -237,7 +237,7 @@ class SphinxInventoryParser
 			yield new SphinxObject($name, $domain, $role, intval($priority), $uri, $displayName);
 		}
 		if (!feof($this->stream)) {
-			throw new UnexpectedValueException('could not read until end of stream'); // @codeCoverageIgnore
+			throw new UnexpectedValueException('could not read until end of stream');
 		}
 	}
 

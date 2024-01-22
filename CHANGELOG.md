@@ -7,6 +7,11 @@
 - Add a fuzzer setup based on [nikic/PHP-Fuzzer] with a target for
   `parseObjectsV2()` and a corpus seeded from the unit test's data ([#6]).
 
+### Changed
+
+- Stream reading errors are silenced in parseObjects, an exception is still
+  thrown.
+
 ### Removed
 
 - Drop support for PHP 7.3 ([#6]).

@@ -231,6 +231,18 @@ final class SphinxInventoryParserTest extends TestCase
 		fclose($stream);
 	}
 
+	public function testParseObjectsStreamError(): void
+	{
+		$this->expectException(UnexpectedValueException::class);
+		$this->expectExceptionMessage("could not read until end of stream");
+		$stream = fopen(__DIR__ . "/data/valid.data", 'a');
+		$parser = new SphinxInventoryParser($stream);
+		$header = new SphinxInventoryHeader(2);
+		$objects = $parser->parseObjects($header);
+		$objects->next();
+		fclose($stream);
+	}
+
 	public function testParseHeaderEmptyProject(): void
 	{
 		$stream = fopen(__DIR__ . "/data/empty_project.header", 'r');
