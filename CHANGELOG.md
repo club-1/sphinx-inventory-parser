@@ -11,6 +11,9 @@
 
 - Stream reading errors in `parseObjects()` and `parseHeader()` are silenced,
   an exception is still thrown but it now contains the error message.
+- Set Zlib inflate stream filter in `parseObjects()` instead of `parseHeader()`.
+  This allows to at least correctly parse the header even if the rest is
+  corrupted ([#10]).
 
 ### Removed
 
@@ -18,6 +21,7 @@
 
 [nikic/PHP-Fuzzer]: https://github.com/nikic/PHP-Fuzzer
 [#6]: https://github.com/club-1/sphinx-inventory-parser/pull/6
+[#10]: https://github.com/club-1/sphinx-inventory-parser/pull/10
 
 ## [v1.1.1] - 2024-01-13
 

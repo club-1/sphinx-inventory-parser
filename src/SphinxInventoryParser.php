@@ -178,11 +178,6 @@ class SphinxInventoryParser
 			$str = rtrim($zlibStr, "\n\r");
 			throw new UnexpectedValueException("fourth line does advertise zlib compression: '$str'");
 		}
-		// We need to set window to 15 because PHP's zlib.inflate filter
-		// implements multiple formats depending on its value, and the
-		// default is in fact -15.
-		// See: <https://bugs.php.net/bug.php?id=71396>
-		stream_filter_append($this->stream, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15]);
 		return $header;
 	}
 
@@ -190,10 +185,9 @@ class SphinxInventoryParser
 	 * Parse the objects part of the stream.
 	 *
 	 * Read the stream as if it consists only of the objects part.
-	 * This function assumes that nothing remains in the stream but
-	 * the uncompressed list of objects. If the stream contains a
-	 * standard inventory, :meth:`parseHeader()`
-	 * must be called beforehand.
+	 * This function assumes that the header part of the stream has
+	 * already been read. If the stream contains a standard inventory,
+	 * :meth:`parseHeader()` must be called beforehand.
 	 *
 	 * @param SphinxInventoryHeader	$header	The header of the inventory, obtained via :meth:`parseHeader()` or manually created.
 	 * @param string	$baseURI	The base string to prepend to an object's location to get its final URI.
@@ -216,6 +210,12 @@ class SphinxInventoryParser
 	 * @ignore
 	 */
 	protected function parseObjectsV2(string $baseURI): Generator {
+		// We need to set window to 15 because PHP's zlib.inflate filter
+		// implements multiple formats depending on its value, and the
+		// default is in fact -15.
+		// See: <https://bugs.php.net/bug.php?id=71396>
+		stream_filter_append($this->stream, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15]);
+
 		while(($objectStr = @fgets($this->stream)) !== false) {
 			if (trim($objectStr) == '' || $objectStr[0] == '#') {
 				continue;

@@ -35,7 +35,7 @@ final class SphinxInventoryParserTest extends TestCase
 	{
 		$object = new SphinxObject(...$objectArray);
 		$stream = fopen('php://memory','r+');
-		fwrite($stream, $objectLine);
+		fwrite($stream, gzcompress($objectLine));
 		rewind($stream);
 		$parser = new SphinxInventoryParser($stream);
 		$header = new SphinxInventoryHeader(2);
@@ -77,7 +77,7 @@ final class SphinxInventoryParserTest extends TestCase
 	public function testInvalidObjectsV2(string $objectLine): void
 	{
 		$stream = fopen('php://memory','r+');
-		fwrite($stream, $objectLine);
+		fwrite($stream, gzcompress($objectLine));
 		rewind($stream);
 		$parser = new SphinxInventoryParser($stream);
 		$header = new SphinxInventoryHeader(2);

@@ -28,7 +28,7 @@ use Club1\SphinxInventoryParser\SphinxInventoryParser;
 /** @var PhpFuzzer\Config $config */
 $config->setTarget(function(string $input) {
 	$stream = fopen('php://memory','r+');
-	fwrite($stream, $input);
+	fwrite($stream, gzcompress($input, 0));
 	rewind($stream);
 
 	$parser = new SphinxInventoryParser($stream);
