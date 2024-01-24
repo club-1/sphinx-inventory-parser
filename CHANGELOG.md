@@ -2,6 +2,8 @@
 
 ## [unreleased]
 
+## [v1.2.0] - 2024-01-25
+
 ### Removed
 
 - Drop support for PHP 7.3 ([#6]).
@@ -58,7 +60,8 @@
 
 First stable release.
 
-[unreleased]: https://github.com/club-1/sphinx-inventory-parser/compare/v1.1.1...HEAD
+[unreleased]: https://github.com/club-1/sphinx-inventory-parser/compare/v1.2.0...HEAD
+[v1.2.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.2.0
 [v1.1.1]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.1.1
 [v1.1.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.1.0
 [v1.0.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.0.0
