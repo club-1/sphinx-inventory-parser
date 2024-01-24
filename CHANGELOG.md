@@ -15,6 +15,11 @@
   This allows to at least correctly parse the header even if the rest is
   corrupted ([#10]).
 
+### Fixed
+
+- Throw an exception early on zlib error instead of logging the error and
+  continuing to parse corrupted data ([#11]).
+
 ### Removed
 
 - Drop support for PHP 7.3 ([#6]).
@@ -22,6 +27,7 @@
 [nikic/PHP-Fuzzer]: https://github.com/nikic/PHP-Fuzzer
 [#6]: https://github.com/club-1/sphinx-inventory-parser/pull/6
 [#10]: https://github.com/club-1/sphinx-inventory-parser/pull/10
+[#11]: https://github.com/club-1/sphinx-inventory-parser/pull/11
 
 ## [v1.1.1] - 2024-01-13
 

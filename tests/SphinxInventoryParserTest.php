@@ -204,6 +204,7 @@ final class SphinxInventoryParserTest extends TestCase
 			["invalid_project.inv", "second line is not a valid Project string: '# Invalid Project: CLUB1'"],
 			["invalid_version.inv", "third line is not a valid Version string: '# Invalid Version: 42'"],
 			["no_zlib.inv", "fourth line does advertise zlib compression: '# The remainder of this file is not compressed.'"],
+			["invalid_zlib.inv", "could not read stream: stream_filter_append(): Filter failed to process pre-buffered data"],
 		];
 	}
 

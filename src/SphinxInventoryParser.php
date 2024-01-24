@@ -214,7 +214,10 @@ class SphinxInventoryParser
 		// implements multiple formats depending on its value, and the
 		// default is in fact -15.
 		// See: <https://bugs.php.net/bug.php?id=71396>
-		stream_filter_append($this->stream, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15]);
+		$filter = @stream_filter_append($this->stream, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15]);
+		if ($filter === false) {
+			throw new UnexpectedValueException('could not read stream: ' . error_msg());
+		}
 
 		while(($objectStr = @fgets($this->stream)) !== false) {
 			if (trim($objectStr) == '' || $objectStr[0] == '#') {
