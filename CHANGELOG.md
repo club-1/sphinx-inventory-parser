@@ -2,6 +2,15 @@
 
 ## [unreleased]
 
+### Removed
+
+- Drop support for PHP 7.3 ([#6]).
+
+### Fixed
+
+- Throw an exception early on zlib error instead of logging the error and
+  continuing to parse corrupted data ([#11]).
+
 ### Added
 
 - Add a fuzzer setup based on [nikic/PHP-Fuzzer] with targets for `parseHeader()`
@@ -15,15 +24,6 @@
 - Set Zlib inflate stream filter in `parseObjects()` instead of `parseHeader()`.
   This allows to at least correctly parse the header even if the rest is
   corrupted ([#10]).
-
-### Fixed
-
-- Throw an exception early on zlib error instead of logging the error and
-  continuing to parse corrupted data ([#11]).
-
-### Removed
-
-- Drop support for PHP 7.3 ([#6]).
 
 [nikic/PHP-Fuzzer]: https://github.com/nikic/PHP-Fuzzer
 [#6]: https://github.com/club-1/sphinx-inventory-parser/pull/6
