@@ -1,4 +1,5 @@
 corpus
 crash-*.txt
 minimized-*.txt
+php-fuzzer_*.phar
 

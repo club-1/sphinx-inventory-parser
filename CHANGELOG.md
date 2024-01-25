@@ -2,6 +2,13 @@
 
 ## [unreleased]
 
+### Added
+
+- Add back PHP 7.3 support, by using PHP-Fuzzer's phar instead of installing it
+  with composer ([#12]).
+
+[#12]: https://github.com/club-1/sphinx-inventory-parser/pull/12
+
 ## [v1.2.0] - 2024-01-25
 
 ### Removed

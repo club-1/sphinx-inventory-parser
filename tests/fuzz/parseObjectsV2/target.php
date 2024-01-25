@@ -21,6 +21,8 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+require __DIR__ . "/../../../vendor/autoload.php";
+
 use Club1\SphinxInventoryParser\SphinxInventoryHeader;
 use Club1\SphinxInventoryParser\SphinxInventoryParser;
 
