@@ -12,6 +12,11 @@
             "Club1\\SphinxInventoryParser\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Club1\\SphinxInventoryParser\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Nicolas Peugnet",

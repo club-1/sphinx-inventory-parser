@@ -21,6 +21,12 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+namespace Club1\SphinxInventoryParser\Tests;
+
+use InvalidArgumentException;
+use RuntimeException;
+use UnexpectedValueException;
+
 use Club1\SphinxInventoryParser\SphinxInventoryHeader;
 use Club1\SphinxInventoryParser\SphinxInventoryParser;
 use Club1\SphinxInventoryParser\SphinxObject;
@@ -289,6 +295,18 @@ final class SphinxInventoryParserTest extends TestCase
 				"object string did not match pattern: ' domain:role 1 location dispname'"
 			],
 		];
+	}
+
+	public function testParseFromDocClose(): void
+	{
+		@stream_wrapper_unregister('test');
+		stream_wrapper_register('test', TestStream::class);
+		$this->expectException(RuntimeException::class);
+		try {
+			SphinxInventoryParser::parseFromDoc('test://data');
+		} finally {
+			$this->assertFalse(TestStream::$open);
+		}
 	}
 
 	public function testParseFromDocValid(): void
