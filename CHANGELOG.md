@@ -6,6 +6,10 @@
 
 - Make sure the stream is closed even on error in `parseFromDoc()` ([#14]).
 
+### Changed
+
+- Simplify error handling in `parseFromDoc()`.
+
 [#14]: https://github.com/club-1/sphinx-inventory-parser/pull/14
 
 ## [v1.2.0] - 2024-01-25

@@ -64,9 +64,7 @@ class SphinxInventoryParser
 		}
 		$stream = @fopen($url . $path, 'r');
 		if ($stream === false) {
-			$error = error_get_last();
-			$message = $error ? $error['message'] : 'unknown error';
-			throw new RuntimeException("could not open file: $message");
+			throw new RuntimeException("could not open file: " . error_msg());
 		}
 		$parser = new static($stream);
 		try {
