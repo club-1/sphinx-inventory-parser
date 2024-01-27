@@ -1,4 +1,4 @@
-files = valid.inv skipped_lines.inv skipped_lines_lf.inv skipped_lines_crlf.inv no_objects.inv name_whitespace.inv
+files = valid.inv skipped_lines.inv skipped_lines_lf.inv skipped_lines_crlf.inv no_objects.inv name_whitespace.inv invalid_object.inv
 
 ifeq (, $(shell which pigz 2> /dev/null))
 	ZLIB_COMPRESS = ./zlib-compress
@@ -14,7 +14,6 @@ all: $(files)
 .INTERMEDIATE: $(files:.inv=.data.zz)
 %.zz: %
 	$(ZLIB_COMPRESS) < $< > $@
-
 
 clean:
 	rm -f *.zz $(files)

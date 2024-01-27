@@ -264,11 +264,31 @@ final class SphinxInventoryParserTest extends TestCase
 		fclose($stream);
 	}
 
-	public function testParseFromDocException(): void
+	/**
+	 * @dataProvider parseFromDocExceptionsProvider
+	 */
+	public function testParseFromDocException(string $inv, string $class, string $msg): void
 	{
-		$this->expectException(RuntimeException::class);
-		$this->expectExceptionMessageMatches('#^could not open file: fopen\(data/objects.inv\): #');
-		$inventory = SphinxInventoryParser::parseFromDoc('data');
+		$this->expectException($class);
+		$this->expectExceptionMessage($msg);
+		SphinxInventoryParser::parseFromDoc('tests/data', $inv);
+	}
+
+	/**
+	 * @return string[][]
+	 */
+	public function parseFromDocExceptionsProvider(): array
+	{
+		return [
+			["non_existing.inv",
+				RuntimeException::class,
+				"could not open file: fopen(tests/data/non_existing.inv): "
+			],
+			["invalid_object.inv",
+				UnexpectedValueException::class,
+				"object string did not match pattern: ' domain:role 1 location dispname'"
+			],
+		];
 	}
 
 	public function testParseFromDocValid(): void

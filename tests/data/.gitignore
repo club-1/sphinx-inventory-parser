@@ -1,4 +1,5 @@
 *.zz
+invalid_object.inv
 name_whitespace.inv
 no_objects.inv
 skipped_lines.inv
