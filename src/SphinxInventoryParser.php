@@ -69,8 +69,11 @@ class SphinxInventoryParser
 			throw new RuntimeException("could not open file: $message");
 		}
 		$parser = new static($stream);
-		$inventory = $parser->parse($url);
-		fclose($stream);
+		try {
+			$inventory = $parser->parse($url);
+		} finally {
+			fclose($stream);
+		}
 		return $inventory;
 	}
 
