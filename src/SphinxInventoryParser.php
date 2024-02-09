@@ -59,6 +59,9 @@ class SphinxInventoryParser
 	 * @throws RuntimeException		If the stream can not be open.
 	 */
 	public static function parseFromDoc(string $url, string $path = 'objects.inv'): SphinxInventory {
+		if (strlen($url) == 0) {
+			throw new InvalidArgumentException('$url cannot be empty');
+		}
 		if ($url[-1] != '/') {
 			$url .= '/';
 		}

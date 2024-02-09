@@ -9,8 +9,11 @@
 ### Changed
 
 - Simplify error handling in `parseFromDoc()`.
+- Throw an exception in `parseFromDoc()` when `$url` is an empty string, instead
+  of emitting a warning and continuing ([#15]).
 
 [#14]: https://github.com/club-1/sphinx-inventory-parser/pull/14
+[#15]: https://github.com/club-1/sphinx-inventory-parser/pull/15
 
 ## [v1.2.0] - 2024-01-25
 
