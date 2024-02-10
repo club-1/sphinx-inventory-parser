@@ -52,7 +52,7 @@ analyse: vendor
 	vendor/bin/phpstan analyse src --level 9 $(PHPSTANFLAGS)
 
 test: vendor tests/data
-	XDEBUG_MODE=coverage vendor/bin/phpunit tests --coverage-filter='src' $(PHPUNITFLAGS)
+	XDEBUG_MODE=coverage vendor/bin/phpunit tests --path-coverage --coverage-filter='src' $(PHPUNITFLAGS)
 
 fuzz: vendor
 	$(MAKE) -C tests/fuzz
