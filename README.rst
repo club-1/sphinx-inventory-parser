@@ -8,7 +8,7 @@ PHP Sphinx Inventory Parser
 Sphinx Inventory Parser is PHP library
 to parse `Sphinx documentation <https://www.sphinx-doc.org/>`_'s object inventory file format
 as used by `intersphinx <https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html>`_.
-It is loosely inspired from `sphobjinv <https://github.com/bskinn/sphobjinv>`__,
+It is loosely inspired from `sphobjinv <https://github.com/bskinn/sphobjinv>`_,
 whose documentation have also been very useful
 by describing the `Sphinx objects.inv v2 Syntax <https://sphobjinv.readthedocs.io/en/stable/syntax.html>`_.
 
@@ -94,13 +94,12 @@ Build scripts
 .. |text:SphinxInventory| replace:: ``SphinxInventory``
 .. _text:SphinxInventory: https://club-1.github.io/sphinx-inventory-parser/api.html#SphinxInventory
 
-.. |License LGPL-2.1-or-later| image:: https://img.shields.io/badge/license-LGPL--2.1--or--later-blue
+.. |License LGPL-2.1-or-later| image:: https://img.shields.io/badge/license-LGPL--2.1--or--later-blue.svg
    :target: LICENSE
-.. |PHP versions tested| image:: https://img.shields.io/badge/php-7.4%20%7C%208.0%20%7C%208.1%20%7C%208.2%20%7C%208.3-blue
-.. |build status| image:: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/build.yml
+.. |PHP versions tested| image:: https://img.shields.io/badge/php-7.4%20%7C%208.0%20%7C%208.1%20%7C%208.2%20%7C%208.3-blue.svg
+.. |build status| image:: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/build.yml.svg
    :target: https://github.com/club-1/sphinx-inventory-parser/actions/workflows/build.yml?query=branch%3Amain
 .. |coverage report| image:: https://img.shields.io/codecov/c/gh/club-1/sphinx-inventory-parser
    :target: https://app.codecov.io/gh/club-1/sphinx-inventory-parser
-
-.. |docs status| image:: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/docs.yml?label=docs
+.. |docs status| image:: https://img.shields.io/github/actions/workflow/status/club-1/sphinx-inventory-parser/docs.yml.svg?label=docs
    :target: https://club-1.github.io/sphinx-inventory-parser/
