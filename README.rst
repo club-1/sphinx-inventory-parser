@@ -33,7 +33,7 @@ and can be installed via `composer <https://getcomposer.org/>`_:
 Simple example
 --------------
 
-The simplest way to use it is with :meth`SphinxInventoryParser::parseFromDoc()`
+The simplest way to use it is with :meth:`SphinxInventoryParser::parseFromDoc()`
 that creates a :class:`SphinxInventory` object directly from an online documentation,
 based on its URL (and an optional inventory path).
 
