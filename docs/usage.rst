@@ -8,9 +8,6 @@ so there are multiple ways to use it.
    :start-after: .. Example
    :end-before: .. Documentation
 
-.. |SphinxInventoryParser::parseFromDoc()| replace:: :meth:`SphinxInventoryParser::parseFromDoc()`
-.. |SphinxInventory| replace:: :class:`SphinxInventory`
-
 Using an existing stream
 ------------------------
 
