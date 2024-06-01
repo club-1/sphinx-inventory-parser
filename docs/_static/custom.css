@@ -1,5 +1,11 @@
 /************* Alabaster Theme customizations. *************/
 
+/* Make document width slightly larger. */
+div.document {
+  max-width: 1040px;
+  width: auto;
+}
+
 /* Add some space between PHP doc elements. */
 dl.php > dt {
   margin-top: 35px;
