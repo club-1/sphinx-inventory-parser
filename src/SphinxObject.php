@@ -44,7 +44,7 @@ class SphinxObject {
 	/**
 	 * ``string`` -- Domain of the object.
 	 *
-	 * See :external:doc:`usage/restructuredtext/domains` in Sphinx documentation
+	 * See :external:doc:`usage/domains/index` in Sphinx documentation
 	 * for more information.
 	 *
 	 * @var string $domain
