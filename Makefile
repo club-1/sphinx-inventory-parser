@@ -5,6 +5,7 @@ COMPOSERFLAGS +=
 PHPSTANFLAGS  += $(if $(INTERACTIVE),,--no-progress) $(if $(INTERACTIVE)$(CI),--ansi,--error-format=raw)
 PHPUNITFLAGS  += $(if $(INTERACTIVE)$(CI),--colors=always --coverage-text,--colors=never)
 SRC            = $(wildcard src/*)
+BUILDER       ?= html
 
 all: vendor tests/data
 
@@ -18,7 +19,7 @@ docs/api/%.rst: src/%.php vendor
 	> $@
 
 docs: $(patsubst src/%.php,docs/api/%.rst,$(SRC))
-	$(MAKE) -C $@ html
+	$(MAKE) -C $@ $(BUILDER)
 
 tests/data:
 	$(MAKE) -C $@ $(filter all clean,$(MAKECMDGOALS))
