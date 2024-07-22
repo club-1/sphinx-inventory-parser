@@ -12,7 +12,7 @@ from pygments.lexers.web import PhpLexer
 project = 'PHP Sphinx Inventory Parser'
 copyright = '2023-2024, Nicolas Peugnet'
 author = 'Nicolas Peugnet'
-release = 'v1.2.0'
+release = 'v1.3.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

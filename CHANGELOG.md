@@ -2,6 +2,8 @@
 
 ## [unreleased]
 
+## [v1.3.0] - 2024-07-22
+
 ### Fixed
 
 - Make sure the stream is closed even on error in `parseFromDoc()` ([#14]).
@@ -73,7 +75,8 @@
 
 First stable release.
 
-[unreleased]: https://github.com/club-1/sphinx-inventory-parser/compare/v1.2.0...HEAD
+[unreleased]: https://github.com/club-1/sphinx-inventory-parser/compare/v1.3.0...HEAD
+[v1.3.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.3.0
 [v1.2.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.2.0
 [v1.1.1]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.1.1
 [v1.1.0]: https://github.com/club-1/sphinx-inventory-parser/releases/tag/v1.1.0
