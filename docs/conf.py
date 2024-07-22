@@ -49,6 +49,10 @@ html_theme_options = {
     'description': "Parse Sphinx documentation's object.inv inventory file format into an indexed SphinxInventory object.",
     'navigation_with_keys': True,
     'show_relbar_bottom': True,
+    'github_user': 'club-1',
+    'github_repo': 'sphinx-inventory-parser',
+    'github_type': 'star',
+    'github_button': True,
 }
 html_css_files = [
     'custom.css',
