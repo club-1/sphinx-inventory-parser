@@ -10,7 +10,7 @@ The code hosting and the issue tracker is provided by `GitHub <https://github.co
 Compiling the documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The documentation is obviously generated using `Sphinx <https://sphinx-doc.org>`_,
+The documentation is obviously generated using `Sphinx <https://www.sphinx-doc.org>`_,
 so the requierements are:
 
 -  **sphinx**: the documentation generator
