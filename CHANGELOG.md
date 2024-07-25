@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Added
+
+- Add information about the documentation in the documentation.
+
 ## [v1.3.0] - 2024-07-22
 
 ### Fixed

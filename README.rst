@@ -69,9 +69,7 @@ Development requirements
 -  **composer**: to install PHP development dependencies
 -  **pigz**: (Optional) to build tests data, will fallback to a PHP script if not present
 
-On Debian and derivatives:
-
-.. code:: shell
+On Debian and derivatives::
 
    sudo apt install make composer pigz
 
