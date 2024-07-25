@@ -50,7 +50,7 @@ check: analyse test
 	composer validate
 
 analyse: vendor
-	vendor/bin/phpstan analyse src --level 9 $(PHPSTANFLAGS)
+	vendor/bin/phpstan analyse src --level 9 --configuration src/phpstan.neon $(PHPSTANFLAGS)
 	vendor/bin/phpstan analyse tests --level 5 $(PHPSTANFLAGS)
 
 test: vendor tests/data

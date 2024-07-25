@@ -160,6 +160,7 @@ class SphinxInventoryParser
 	}
 
 	/**
+	 * @throws UnexpectedValueException
 	 * @ignore
 	 */
 	protected function parseHeaderV2(SphinxInventoryHeader $header): SphinxInventoryHeader {
@@ -211,6 +212,7 @@ class SphinxInventoryParser
 
 	/**
 	 * @return Generator&iterable<int,SphinxObject>
+	 * @throws UnexpectedValueException
 	 * @ignore
 	 */
 	protected function parseObjectsV2(string $baseURI): Generator {
