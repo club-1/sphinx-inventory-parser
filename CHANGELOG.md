@@ -4,7 +4,9 @@
 
 ### Added
 
-- Add information about the documentation in the documentation.
+- Add information about the documentation in the documentation ([#22]).
+
+[#22]: https://github.com/club-1/sphinx-inventory-parser/pull/22
 
 ## [v1.3.0] - 2024-07-22
 
