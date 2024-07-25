@@ -4,7 +4,7 @@ INTERACTIVE    = $(shell [ -t 0 ] && echo 1)
 COMPOSERFLAGS +=
 PHPSTANFLAGS  += $(if $(INTERACTIVE),,--no-progress) $(if $(INTERACTIVE)$(CI),--ansi,--error-format=raw)
 PHPUNITFLAGS  += $(if $(INTERACTIVE)$(CI),--colors=always --coverage-text,--colors=never)
-SRC            = $(wildcard src/*)
+SRC            = $(wildcard src/*.php)
 BUILDER       ?= html
 
 all: vendor tests/data
@@ -51,6 +51,7 @@ check: analyse test
 
 analyse: vendor
 	vendor/bin/phpstan analyse src --level 9 $(PHPSTANFLAGS)
+	vendor/bin/phpstan analyse tests --level 5 $(PHPSTANFLAGS)
 
 test: vendor tests/data
 	XDEBUG_MODE=coverage vendor/bin/phpunit tests --coverage-filter='src' $(PHPUNITFLAGS)
