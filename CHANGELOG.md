@@ -5,12 +5,14 @@
 ### Added
 
 - Add information about the documentation in the documentation ([#22]).
+- Add PHP 8.4 to the list of supported versions ([#25]).
 
 ### Changed
 
 - Remove `docs` directory from composer package.
 
 [#22]: https://github.com/club-1/sphinx-inventory-parser/pull/22
+[#25]: https://github.com/club-1/sphinx-inventory-parser/pull/25
 
 ## [v1.3.0] - 2024-07-22
 
