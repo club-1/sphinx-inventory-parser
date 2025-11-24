@@ -25,7 +25,7 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: xdebug
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Get Composer Cache Directory
         id: composer-cache
@@ -66,7 +66,7 @@ jobs:
         run: |
           php --version
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Get PHP version
         id: php
